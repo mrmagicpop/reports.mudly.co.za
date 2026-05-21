@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curated Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --bg: #0a0e14;
+    --card: #131a24;
+    --border: #1e293b;
+    --text: #d1d5db;
+    --head: #e5e7eb;
+    --muted: #8b95a8;
+    --dim: #555d6e;
+    --accent: #06b6d4;
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+  }
+
+  * { margin:0;padding:0;box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 64px 24px 48px;
+    text-align: center;
+    background: linear-gradient(135deg, #0d1520 0%, #131a2c 50%, #0a0e14 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero .icon { font-size: 42px; margin-bottom: 12px; }
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .hero .subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .hero .meta-line {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .hero .meta-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+  .mb-date { background: rgba(139,92,246,0.12); color: var(--purple); }
+  .mb-type { background: rgba(6,182,212,0.12); color: var(--accent); }
+  .mb-status { background: rgba(245,158,11,0.12); color: var(--amber); }
+
+  /* Main */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* Abstract */
+  .abstract-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+
+  .abstract-box h3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .abstract-box p {
+    font-family: 'Merriweather', serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .abstract-box .keywords {
+    margin-top: 16px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  .abstract-box .keywords span {
+    color: var(--dim);
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 36px;
+  }
+
+  section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--head);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  section h2 .s-num {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    min-width: 28px;
+  }
+
+  section p {
+    font-size: 0.92rem;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  section p:last-child { margin-bottom: 0; }
+
+  /* Info cards */
+  .info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .info-card .ic-icon { font-size: 1.5rem; margin-bottom: 6px; }
+  .info-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--head); }
+  .info-card p { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+  /* Dosing table */
+  .dose-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .dose-table th {
+    background: var(--card);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dose-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(30,41,59,0.4);
+    color: var(--text);
+  }
+
+  .dose-table tr:last-child td { border-bottom: none; }
+  .dose-table tr:hover { background: rgba(139,92,246,0.03); }
+
+  /* Warning callout */
+  .callout {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border: 1px solid;
+  }
+
+  .callout-warning {
+    background: rgba(239,68,68,0.06);
+    border-color: rgba(239,68,68,0.2);
+  }
+
+  .callout-info {
+    background: rgba(6,182,212,0.06);
+    border-color: rgba(6,182,212,0.2);
+  }
+
+  .callout h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .callout-warning h4 { color: var(--red); }
+  .callout-info h4 { color: var(--accent); }
+  .callout p { font-size: 0.85rem; color: var(--text); margin: 0; }
+
+  /* Conclusion */
+  .verdict {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 20px;
+  }
+
+  .verdict h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--head);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .verdict ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .verdict ul li {
+    padding: 8px 0;
+    font-size: 0.88rem;
+    color: var(--text);
+    border-bottom: 1px solid rgba(30,41,59,0.4);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  .verdict ul li:last-child { border-bottom: none; }
+  .verdict ul li .li-icon { flex-shrink: 0; }
+
+  /* References */
+  .ref-list {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 16px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .ref-list li {
+    padding: 4px 0;
+    word-break: break-all;
+  }
+
+  .ref-list a {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .ref-list a:hover { opacity: 1; }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--dim);
+    font-size: 0.72rem;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer a { color: var(--muted); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .info-row { grid-template-columns: 1fr; }
+    .hero .meta-line { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+<a href="/" style="position:fixed;top:14px;left:20px;z-index:100;font-size:12px;font-weight:600;color:#8b95a8;text-decoration:none;letter-spacing:0.5px;opacity:0.7;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Curated Intelligence</a>>
+
+  <div class="hero">
+    <div class="icon">🧬</div>
+    <h1>The Wolverine Peptide Stack</h1>
+    <p class="subtitle">A Critical Review of BPC-157 & TB-500 for Tissue Regeneration and Recovery</p>
+    <div class="meta-line">
+      <span class="meta-badge mb-date">May 2026</span>
+      <span class="meta-badge mb-type">Research Brief</span>
+      <span class="meta-badge mb-status">Experimental / Unapproved</span>
+    </div>
+  </div>
+
+<main>
+
+  <div class="abstract-box">
+    <h3>▎ Abstract</h3>
+    <p>The "Wolverine Stack" — a combination of BPC-157 (Body Protection Compound-157) and TB-500 (Thymosin Beta-4 fragment) — has gained significant attention in biohacking, sports medicine, and regenerative therapy circles for its purported ability to dramatically accelerate soft tissue healing. Named after the Marvel character's regenerative abilities, this dual-peptide protocol targets complementary healing pathways: BPC-157 promotes localized angiogenesis and tissue repair, while TB-500 drives systemic cell migration and actin regulation. Despite compelling preclinical data in rodent models, no human clinical trials have validated these effects. This brief reviews the current state of evidence, proposed mechanisms, typical dosing protocols, safety profile, and the evolving regulatory landscape as of Q2 2026.</p>
+    <p class="keywords">Keywords: <span>BPC-157 · TB-500 · Thymosin Beta-4 · peptide therapy · tissue regeneration · angiogenesis · biohacking · WADA S0 · FDA 503A · experimental therapeutics</span></p>
+  </div>
+
+  <section>
+    <h2><span class="s-num">01</span> Introduction & Background</h2>
+    <p>The "Wolverine Stack" entered popular lexicon through biohacking forums and longevity podcasts around 2022–2023, though both constituent peptides have been studied in preclinical contexts for decades. BPC-157 was first isolated from human gastric juice in the 1990s and has been investigated for wound healing, tendon repair, and gastrointestinal protection. TB-500, a synthetic fragment of the naturally occurring thymosin beta-4 protein, has been studied for dermal healing, cardiac repair post-infarction, and corneal regeneration.</p>
+    <p>The rationale for combining them rests on the hypothesis that BPC-157's localized repair signaling synergizes with TB-500's systemic mobilization of stem cells and actin-regulatory anti-inflammatory effects — covering both the "spot" and the "system" in tissue repair cascades. Athletes, bodybuilders, and patients with chronic musculoskeletal injuries have driven off-label demand, despite the complete absence of human Phase I–III trial data.</p>
+    <p>As of May 2026, neither peptide holds FDA approval for any human indication. Both are classified as FDA 503A Category 2 bulk drug substances, prohibiting their use in compounded pharmacy preparations in the United States. Both are also banned by WADA under category S0 (Non-Approved Substances).</p>
+  </section>
+
+  <section>
+    <h2><span class="s-num">02</span> Mechanism of Action</h2>
+
+    <div class="info-row">
+      <div class="info-card">
+        <div class="ic-icon">🎯</div>
+        <h4>BPC-157</h4>
+        <p>Pentadecapeptide (15 amino acids) derived from BPC, a gastric juice protein. Promotes angiogenesis via VEGFR2 upregulation, accelerates fibroblast migration and collagen deposition, modulates nitric oxide and prostaglandin pathways, and may upregulate growth hormone receptors in injured tissue. Demonstrates cytoprotective effects on gut mucosa and has been shown to accelerate tendon-to-bone healing in rodent models.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">🔄</div>
+        <h4>TB-500</h4>
+        <p>Synthetic 43-amino-acid fragment (Ac-SDKP) of Thymosin Beta-4. Primary mechanism: actin sequestration and polymerization regulation — reducing inflammation at injury sites while directing cell migration. Mobilizes stem cells and endothelial progenitor cells to damaged tissue, enhances collagen alignment, and promotes hair follicle and dermal regeneration. Systemic effect; does not require local injection.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <h4>▸ Synergy Hypothesis</h4>
+      <p>BPC-157 provides the local "build" signals (angiogenesis, fibroblast recruitment) at the injury site. TB-500 provides the systemic "logistics" — directing progenitor cells to the area and clearing inflammatory debris via actin regulation. The theoretical result is faster, higher-quality tissue remodeling than either peptide alone.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="s-num">03</span> Conditions Targeted</h2>
+    <p>The protocol is applied — anecdotally and in concierge clinics — across a range of musculoskeletal and systemic conditions:</p>
+    <div class="info-row" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="info-card"><h4>🦴 Tendon & Ligament</h4><p>Achilles tendinopathy, patellar tendinitis, partial ACL/MCL tears, chronic ankle instability</p></div>
+      <div class="info-card"><h4>💪 Muscle</h4><p>Grade I–II muscle strains, delayed-onset recovery, post-exercise microtrauma</p></div>
+      <div class="info-card"><h4>🔪 Post-Surgical</h4><p>Accelerated repair following orthopaedic procedures, rotator cuff repair, labral tears</p></div>
+      <div class="info-card"><h4>🫃 Gut</h4><p>BPC-157 in oral form for IBD, leaky gut, NSAID-induced gastric lesions (strongest preclinical data)</p></div>
+      <div class="info-card"><h4>🔥 Inflammation</h4><p>Chronic systemic inflammation, autoimmune-driven joint pain, early osteoarthritis</p></div>
+      <div class="info-card"><h4>🧠 Neuro</h4><p>Experimental: BPC-157 for peripheral nerve regeneration and post-concussion recovery (rodent data only)</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="s-num">04</span> Dosing Protocols (Anecdotal / Clinic-Adopted)</h2>
+    <p><strong>Important caveat:</strong> No FDA-approved dosing guidelines exist. All protocols below are drawn from concierge clinic practice patterns and community-reported regimens. They have not been validated in controlled human trials.</p>
+
+    <table class="dose-table">
+      <thead>
+        <tr>
+          <th>Peptide</th>
+          <th>Phase</th>
+          <th>Dosage</th>
+          <th>Frequency</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BPC-157</strong></td>
+          <td>Standard</td>
+          <td>200–500 mcg</td>
+          <td>Daily (QD)</td>
+          <td>4–8 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>BPC-157</strong></td>
+          <td>Acute injury</td>
+          <td>500–750 mcg</td>
+          <td>Daily, split 2×</td>
+          <td>2–4 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>BPC-157</strong></td>
+          <td>Oral (gut)</td>
+          <td>250–500 mcg</td>
+          <td>Daily (QD)</td>
+          <td>4–6 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>TB-500</strong></td>
+          <td>Loading</td>
+          <td>2.5–5 mg</td>
+          <td>2× per week</td>
+          <td>Weeks 1–6</td>
+        </tr>
+        <tr>
+          <td><strong>TB-500</strong></td>
+          <td>Maintenance</td>
+          <td>2 mg</td>
+          <td>1× per week</td>
+          <td>Weeks 5–8+</td>
+        </tr>
+        <tr>
+          <td><strong>Combined</strong></td>
+          <td>Stack cycle</td>
+          <td>BPC daily + TB-500 weekly</td>
+          <td>Per above</td>
+          <td>8–12 weeks max</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:0.8rem;color:var(--muted)"><strong>Administration:</strong> Subcutaneous injection (both peptides). BPC-157 often injected locally near injury site; TB-500 is systemic. Both are supplied as lyophilized powder requiring reconstitution with bacteriostatic water. Typical storage: refrigerated at 2–8°C post-reconstitution, used within 30 days.</p>
+  </section>
+
+  <section>
+    <h2><span class="s-num">05</span> Safety Profile & Reported Adverse Events</h2>
+    <p>The safety profile in available preclinical data is generally benign, but significant gaps exist. No long-term (>12 month) human safety data is available. Key observations:</p>
+
+    <div class="info-row">
+      <div class="info-card">
+        <h4 style="color:var(--green)">BPC-157 Tolerability</h4>
+        <p>Mild and transient effects reported: injection site redness (~5–10%), mild nausea in first week (~3%), transient fatigue. No serious adverse events documented in rodent models even at high doses. Notable: oral BPC-157 is acid-stable (derived from gastric juice protein).</p>
+      </div>
+      <div class="info-card">
+        <h4 style="color:var(--amber)">TB-500 Tolerability</h4>
+        <p>Transient head rush post-injection (common), mild lethargy during loading phase, injection site discomfort. No serious events in limited human observational data — but sample sizes are small and self-reported.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <h4>⚠️ Theoretical Cancer Risk</h4>
+      <p>The primary long-term concern is that both peptides promote <strong>angiogenesis</strong> (new blood vessel growth) — the same mechanism that tumors exploit to grow and metastasize. If dormant or undiagnosed cancer cells are present, an angiogenic peptide protocol could theoretically accelerate their progression. No human data exists to quantify this risk. Several clinicians have raised this as a reason to avoid non-medically-supervised use.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="s-num">06</span> Regulatory Status (Q2 2026)</h2>
+
+    <table class="dose-table">
+      <thead>
+        <tr><th>Authority</th><th>Status</th><th>Implication</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>FDA (USA)</strong></td><td>Not approved for human use</td><td>Cannot be legally prescribed or compounded by licensed pharmacies. Classified as 503A Category 2 bulk drug substances (Feb 2026 ruling).</td></tr>
+        <tr><td><strong>WADA</strong></td><td>Prohibited (S0 category)</td><td>Automatic anti-doping violation for any competitive athlete. Both BPC-157 and TB-500 are explicitly listed.</td></tr>
+        <tr><td><strong>EMA (EU)</strong></td><td>Not authorized</td><td>No marketing authorization. Treated as an unlicensed medicine in most member states.</td></tr>
+        <tr><td><strong>TGA (Australia)</strong></td><td>Schedule 4 (prescription only)</td><td>Available via compounding pharmacies with a valid prescription — one of the few jurisdictions with a defined regulatory pathway.</td></tr>
+        <tr><td><strong>General Market</strong></td><td>Sold as "research chemical"</td><td>Widely available online, labeled "not for human consumption." Purity, sterility, and dosing accuracy are unverified. Third-party testing is inconsistent.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+      <h4>⚠️ February 2026 FDA 503A Ruling</h4>
+      <p>On 4 February 2026, the FDA formally classified BPC-157 and TB-500 (along with GHK-Cu, AOD-9604, and several others) as Category 2 substances under Section 503A. This means these peptides <strong>cannot be used in compounded medications</strong> by licensed pharmacies in the United States. This effectively eliminated the main legal access pathway for physician-supervised use. The FDA is currently evaluating whether to permanently add them to the 503A Bulk Drug Substances List — a decision expected in late 2026 or early 2027.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="s-num">07</span> Evidence Quality Assessment</h2>
+
+    <table class="dose-table">
+      <thead>
+        <tr><th>Evidence Type</th><th>BPC-157</th><th>TB-500</th><th>Combined Stack</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>In vitro (cell studies)</td><td>✅ Extensive</td><td>✅ Extensive</td><td>❌ None</td></tr>
+        <tr><td>Rodent models</td><td>✅ Extensive (tendon, gut, CNS)</td><td>✅ Extensive (dermal, cardiac)</td><td>❌ None</td></tr>
+        <tr><td>Large animal models</td><td>⚠️ Limited (canine, porcine)</td><td>⚠️ Limited</td><td>❌ None</td></tr>
+        <tr><td>Human RCT (Phase I–III)</td><td>❌ None</td><td>❌ None</td><td>❌ None</td></tr>
+        <tr><td>Human observational / case series</td><td>⚠️ Small, uncontrolled</td><td>⚠️ Small, uncontrolled</td><td>⚠️ Anecdotal only</td></tr>
+        <tr><td>Long-term safety data (>12 mo)</td><td>❌ None</td><td>❌ None</td><td>❌ None</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="verdict">
+    <h3>📋 Verdict</h3>
+    <ul>
+      <li><span class="li-icon">🔬</span> <strong>Preclinical promise is real</strong> — BPC-157 and TB-500 both show consistent, reproducible tissue-healing effects across multiple independent rodent studies.</li>
+      <li><span class="li-icon">⚠️</span> <strong>Human data is absent</strong> — No randomized controlled trial has ever been conducted on either peptide individually, much less in combination. Efficacy claims in humans are entirely anecdotal.</li>
+      <li><span class="li-icon">⚖️</span> <strong>Legal access is narrowing</strong> — The FDA's February 2026 503A Category 2 ruling eliminated U.S. compounding pharmacy access. Australian TGA Schedule 4 is one of the only remaining regulated pathways.</li>
+      <li><span class="li-icon">🛑</span> <strong>Angiogenesis risk is non-trivial</strong> — The cancer promotion concern is theoretical but mechanistically plausible. Without long-term human data, the risk-benefit calculus remains uncertain.</li>
+      <li><span class="li-icon">💡</span> <strong>Worth watching</strong> — If formal human trials ever materialize, the mechanistic rationale is strong enough to warrant careful optimism. For now, the Wolverine Stack remains an interesting experimental concept with a wide gap between preclinical promise and clinical proof.</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2><span class="s-num">08</span> References & Further Reading</h2>
+    <ol class="ref-list">
+      <li>1. FDA Proposed Rule: Bulk Drug Substances That Can Be Used To Compound Drug Products in Accordance With Section 503A — <a href="https://www.federalregister.gov/documents/2026/02/04/2026-01921/bulk-drug-substances-that-can-be-used-to-compound-drug-products">Federal Register, Feb 2026</a></li>
+      <li>2. Gwyer D, et al. "Gastric pentadecapeptide BPC 157 in the treatment of soft tissue and bone healing." <em>Curr Pharm Des.</em> 2019 — <a href="https://pubmed.ncbi.nlm.nih.gov/?term=BPC-157+soft+tissue">PubMed</a></li>
+      <li>3. Goldstein AL, et al. "Thymosin β4: actin-sequestering protein moonlights to repair injured tissues." <em>Trends Mol Med.</em> 2005 — <a href="https://pubmed.ncbi.nlm.nih.gov/?term=thymosin+beta+4+repair">PubMed</a></li>
+      <li>4. WADA Prohibited List 2026 — S0: Non-Approved Substances — <a href="https://www.wada-ama.org/en/prohibited-list">wada-ama.org</a></li>
+      <li>5. Lengea Law. "FDA Puts BPC-157, TB-500 Under the Microscope" — <a href="https://lengealaw.com/fda-puts-bpc-157-tb-500-and-5-other-peptides-under-the-microscope-what-prescribers-need-to-know-about-the-503a-review/">lengealaw.com</a></li>
+      <li>6. "BPC-157 & TB-500: Background, Efficacy, and Safety." <em>GlobalRPH</em> — <a href="https://globalrph.com/2025/11/bpc-157-and-tb-500-background-indications-efficacy-and-safety/">globalrph.com</a></li>
+      <li>7. Healthy Male. "What You Need to Know About the Wolverine Stack" — <a href="https://healthymale.org.au/health-article/what-you-need-to-know-about-the-wolverine-stack">healthymale.org.au</a></li>
+      <li>8. Men's Health. "BPC-157: What to Know Now" — <a href="https://www.menshealth.com/fitness/a70398841/bpc-157-what-to-know-now/">menshealth.com</a></li>
+    </ol>
+  </section>
+
+  <div style="text-align:center;padding:20px 0 0"><a href="/" style="display:inline-block;padding:8px 24px;border:1px solid #252d3d;border-radius:8px;color:#8b95a8;text-decoration:none;font-size:13px;font-weight:500;transition:border-color 0.2s,color 0.2s">← Curated Intelligence</a></div>
+
+</main>
+
+<div class="footer">Assembled by an AI agent · <a href="https://github.com/mrmagicpop/reports.mudly.co.za">GitHub</a></div>
+
+</body>
+</html>
