@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curated Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0e14;
+    --card: #131a24;
+    --border: #1e293b;
+    --text: #c9d1d9;
+    --muted: #8b95a8;
+    --dim: #555d6e;
+    --rome: #c83e3e;
+    --florence: #d4852b;
+    --venice: #2b7abf;
+    --amalfi: #2ea87a;
+    --budget: #8b5cf6;
+  }
+
+  * { margin:0;padding:0;box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 80px 24px 60px;
+    text-align: center;
+    background: linear-gradient(135deg, #0d1520 0%, #111d2e 40%, #0f1a1e 100%);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: 
+      radial-gradient(circle at 25% 30%, rgba(200,62,62,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 55% 60%, rgba(212,133,43,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 75% 20%, rgba(43,122,191,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(46,168,122,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .flag { font-size: 48px; margin-bottom: 12px; display: block; animation: wave 2s ease-in-out infinite; }
+  @keyframes wave { 0%,100%{transform:rotate(0deg)} 25%{transform:rotate(-5deg)} 75%{transform:rotate(5deg)} }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 20%, #a0b4cc 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  .hero .dates {
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .hero .route {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .route-city {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .route-arrow { color: var(--dim); font-size: 1.2rem; }
+
+  .rc-rome { background: var(--rome); color: #fff; }
+  .rc-florence { background: var(--florence); color: #fff; }
+  .rc-venice { background: var(--venice); color: #fff; }
+  .rc-amalfi { background: var(--amalfi); color: #fff; }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+
+  /* Main */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* Section Headers */
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title:first-child { margin-top: 0; }
+
+  /* City Blocks */
+  .city-block {
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card);
+    transition: border-color 0.3s;
+  }
+
+  .city-block:hover { border-color: #2d3a4a; }
+
+  .city-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .city-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .ci-rome { background: rgba(200,62,62,0.15); }
+  .ci-florence { background: rgba(212,133,43,0.15); }
+  .ci-venice { background: rgba(43,122,191,0.15); }
+  .ci-amalfi { background: rgba(46,168,122,0.15); }
+
+  .city-info h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .city-info .city-dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .city-nights {
+    margin-left: auto;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .cn-rome { background: rgba(200,62,62,0.12); color: var(--rome); }
+  .cn-florence { background: rgba(212,133,43,0.12); color: var(--florence); }
+  .cn-venice { background: rgba(43,122,191,0.12); color: var(--venice); }
+  .cn-amalfi { background: rgba(46,168,122,0.12); color: var(--amalfi); }
+
+  /* Timeline */
+  .timeline-list {
+    padding: 8px 24px 20px;
+  }
+
+  .timeline-day {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(30,41,59,0.5);
+  }
+
+  .timeline-day:last-child { border-bottom: none; }
+
+  .day-marker {
+    width: 90px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .day-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  .day-label {
+    font-size: 0.68rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+  }
+
+  .day-stops {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .stop-tag {
+    padding: 5px 12px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid;
+    transition: background 0.2s;
+  }
+
+  .stop-tag:hover { filter: brightness(1.2); }
+
+  .st-rome { background: rgba(200,62,62,0.08); border-color: rgba(200,62,62,0.2); color: #e88a8a; }
+  .st-florence { background: rgba(212,133,43,0.08); border-color: rgba(212,133,43,0.2); color: #e8b85e; }
+  .st-venice { background: rgba(43,122,191,0.08); border-color: rgba(43,122,191,0.2); color: #7ab8e8; }
+  .st-amalfi { background: rgba(46,168,122,0.08); border-color: rgba(46,168,122,0.2); color: #7ad8b4; }
+  .st-travel { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.2); color: #b89ef5; }
+
+  .empty-day {
+    color: var(--dim);
+    font-size: 0.78rem;
+    font-style: italic;
+  }
+
+  /* Budget */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .budget-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .budget-card .b-icon { font-size: 1.4rem; margin-bottom: 6px; }
+  .budget-card .b-amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .budget-card .b-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .budget-card .b-note {
+    font-size: 0.68rem;
+    color: var(--dim);
+    margin-top: 2px;
+  }
+
+  .budget-total {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .budget-total .bt-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .budget-total .bt-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .budget-total .bt-perday {
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+
+  /* Map placeholder */
+  .map-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .map-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .map-card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  .map-card:hover .map-card-img { opacity: 0.8; }
+
+  .map-card-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px 16px;
+    background: linear-gradient(transparent, rgba(10,14,20,0.95));
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--dim);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer a { color: var(--muted); text-decoration: none; }
+  .footer a:hover { color: #fff; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .timeline-day { flex-direction: column; gap: 6px; }
+    .day-marker { width: 100%; text-align: left; }
+    .map-row { grid-template-columns: 1fr; }
+    .stats-row { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+<a href="/" style="position:fixed;top:14px;left:20px;z-index:100;font-size:12px;font-weight:600;color:#8b95a8;text-decoration:none;letter-spacing:0.5px;opacity:0.7;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Curated Intelligence</a>>
+
+  <div class="hero">
+    <div class="hero-content">
+      <span class="flag">🇮🇹</span>
+      <h1>Italy 2026</h1>
+      <p class="dates">June 15 → June 30 · 16 Days · 4 Cities</p>
+      <div class="route">
+        <span class="route-city rc-rome">Rome</span>
+        <span class="route-arrow">→</span>
+        <span class="route-city rc-florence">Florence</span>
+        <span class="route-arrow">→</span>
+        <span class="route-city rc-venice">Venice</span>
+        <span class="route-arrow">→</span>
+        <span class="route-city rc-amalfi">Amalfi Coast</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-value">23</div><div class="stat-label">Attractions</div></div>
+        <div class="stat"><div class="stat-value">4</div><div class="stat-label">UNESCO Cities</div></div>
+        <div class="stat"><div class="stat-value">€5,100</div><div class="stat-label">Budget</div></div>
+        <div class="stat"><div class="stat-value">~1,400</div><div class="stat-label">km by rail</div></div>
+      </div>
+    </div>
+  </div>
+
+<main>
+
+  <div class="section-title">🗺️ Itinerary Timeline</div>
+
+  <!-- ROME -->
+  <div class="city-block">
+    <div class="city-header">
+      <div class="city-icon ci-rome">🏛️</div>
+      <div class="city-info">
+        <h3>Rome</h3>
+        <div class="city-dates">June 15 – 18 · The Eternal City</div>
+      </div>
+      <span class="city-nights cn-rome">4 nights</span>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Mon, Jun 15</div><div class="day-label">Day 1</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-travel">✈️ Arrive FCO</span>
+          <span class="stop-tag st-rome">🏛️ Colosseum</span>
+          <span class="stop-tag st-rome">🏛️ Roman Forum</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Tue, Jun 16</div><div class="day-label">Day 2</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-rome">🎨 Vatican Museums & Sistine Chapel</span>
+          <span class="stop-tag st-rome">⛪ St. Peter's Basilica</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Wed, Jun 17</div><div class="day-label">Day 3</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-rome">⛲ Trevi Fountain</span>
+          <span class="stop-tag st-rome">🏛️ Pantheon</span>
+          <span class="stop-tag st-rome">🪜 Spanish Steps</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Thu, Jun 18</div><div class="day-label">Day 4</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-rome">🍷 Trastevere</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLORENCE -->
+  <div class="city-block">
+    <div class="city-header">
+      <div class="city-icon ci-florence">🖼️</div>
+      <div class="city-info">
+        <h3>Florence</h3>
+        <div class="city-dates">June 19 – 21 · Cradle of the Renaissance</div>
+      </div>
+      <span class="city-nights cn-florence">3 nights</span>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Fri, Jun 19</div><div class="day-label">Day 5</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-travel">🚄 Train from Rome</span>
+          <span class="stop-tag st-florence">⛪ Duomo - Santa Maria del Fiore</span>
+          <span class="stop-tag st-florence">🎨 Uffizi Gallery</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Sat, Jun 20</div><div class="day-label">Day 6</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-florence">🌉 Ponte Vecchio</span>
+          <span class="stop-tag st-florence">🗿 Accademia Gallery (David)</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Sun, Jun 21</div><div class="day-label">Day 7</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-florence">🌅 Piazzale Michelangelo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VENICE -->
+  <div class="city-block">
+    <div class="city-header">
+      <div class="city-icon ci-venice">🛶</div>
+      <div class="city-info">
+        <h3>Venice</h3>
+        <div class="city-dates">June 22 – 24 · The Floating City</div>
+      </div>
+      <span class="city-nights cn-venice">3 nights</span>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Mon, Jun 22</div><div class="day-label">Day 8</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-travel">🚄 Train from Florence</span>
+          <span class="stop-tag st-venice">⛪ St. Mark's Basilica</span>
+          <span class="stop-tag st-venice">🏰 Doge's Palace</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Tue, Jun 23</div><div class="day-label">Day 9</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-venice">🌉 Rialto Bridge</span>
+          <span class="stop-tag st-venice">🛶 Grand Canal</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Wed, Jun 24</div><div class="day-label">Day 10</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-venice">🏝️ Murano & Burano Islands</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMALFI COAST -->
+  <div class="city-block">
+    <div class="city-header">
+      <div class="city-icon ci-amalfi">🏖️</div>
+      <div class="city-info">
+        <h3>Amalfi Coast</h3>
+        <div class="city-dates">June 25 – 30 · Coastal Paradise</div>
+      </div>
+      <span class="city-nights cn-amalfi">5 nights</span>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Thu, Jun 25</div><div class="day-label">Day 11</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-travel">🚄 Train Naples → Amalfi</span>
+          <span class="stop-tag st-amalfi">🏘️ Positano</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Fri, Jun 26</div><div class="day-label">Day 12</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-amalfi">🏘️ Ravello</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Sat, Jun 27</div><div class="day-label">Day 13</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-amalfi">🥾 Path of the Gods Hike</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Sun, Jun 28</div><div class="day-label">Day 14</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-amalfi">⛪ Amalfi Cathedral</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Mon, Jun 29</div><div class="day-label">Day 15</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-amalfi">⛵ Capri Day Trip</span>
+        </div>
+      </div>
+      <div class="timeline-day">
+        <div class="day-marker"><div class="day-date">Tue, Jun 30</div><div class="day-label">Day 16</div></div>
+        <div class="day-stops">
+          <span class="stop-tag st-travel">✈️ Return CPT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget -->
+  <div class="section-title">💰 Budget Overview</div>
+  <div class="budget-grid">
+    <div class="budget-card">
+      <div class="b-icon">✈️</div>
+      <div class="b-amount">€1,200</div>
+      <div class="b-label">Flights</div>
+      <div class="b-note">Turkish Airlines CPT-FCO</div>
+    </div>
+    <div class="budget-card">
+      <div class="b-icon">🏨</div>
+      <div class="b-amount">€2,400</div>
+      <div class="b-label">Accommodation</div>
+      <div class="b-note">16 nights across 4 cities</div>
+    </div>
+    <div class="budget-card">
+      <div class="b-icon">🍝</div>
+      <div class="b-amount">€800</div>
+      <div class="b-label">Food & Dining</div>
+      <div class="b-note">Restaurants, gelato, groceries</div>
+    </div>
+    <div class="budget-card">
+      <div class="b-icon">🚄</div>
+      <div class="b-amount">€400</div>
+      <div class="b-label">Transport</div>
+      <div class="b-note">Inter-city trains & local transit</div>
+    </div>
+    <div class="budget-card">
+      <div class="b-icon">🎫</div>
+      <div class="b-amount">€300</div>
+      <div class="b-label">Activities</div>
+      <div class="b-note">Museums, tickets & boat trips</div>
+    </div>
+  </div>
+  <div class="budget-total">
+    <div>
+      <div class="bt-label">Total Estimated Budget</div>
+      <div class="bt-perday">~€319 per day</div>
+    </div>
+    <div class="bt-value">€5,100</div>
+  </div>
+
+  <!-- Map -->
+  <div class="section-title">📍 Key Destinations</div>
+  <div class="map-row">
+    <div class="map-card">
+      <img class="map-card-img" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80" alt="Rome Colosseum" loading="lazy" onerror="this.style.display='none'">
+      <div class="map-card-label">🏛️ Rome — Colosseum & Roman Forum</div>
+    </div>
+    <div class="map-card">
+      <img class="map-card-img" src="https://images.unsplash.com/photo-1543429257-3eb0b65d9c58?w=800&q=80" alt="Florence Duomo" loading="lazy" onerror="this.style.display='none'">
+      <div class="map-card-label">🖼️ Florence — Duomo & Uffizi</div>
+    </div>
+    <div class="map-card">
+      <img class="map-card-img" src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80" alt="Venice canals" loading="lazy" onerror="this.style.display='none'">
+      <div class="map-card-label">🛶 Venice — Canals & St. Mark's Square</div>
+    </div>
+    <div class="map-card">
+      <img class="map-card-img" src="https://images.unsplash.com/photo-1534445867742-43195f40b38c?w=800&q=80" alt="Amalfi Coast" loading="lazy" onerror="this.style.display='none'">
+      <div class="map-card-label">🏖️ Amalfi Coast — Positano & Capri</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:20px 0 0"><a href="/" style="display:inline-block;padding:8px 24px;border:1px solid #252d3d;border-radius:8px;color:#8b95a8;text-decoration:none;font-size:13px;font-weight:500;transition:border-color 0.2s,color 0.2s">← Curated Intelligence</a></div>
+
+</main>
+
+<div class="footer">Assembled by an AI agent · <a href="https://github.com/mrmagicpop/reports.mudly.co.za">GitHub</a></div>
+
+</body>
+</html>
