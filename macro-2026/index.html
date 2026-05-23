@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macro 2026: Money, AI, Oil & War — Connecting the Dots</title>
+<style>
+  :root {
+    --bg: #0a0f18;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --dim: #64748b;
+    --amber: #f59e0b;
+    --emerald: #10b981;
+    --rose: #f43f5e;
+    --sky: #0ea5e9;
+    --violet: #8b5cf6;
+    --orange: #f97316;
+    --red: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; padding: 20px; }
+  .container { max-width: 820px; margin: 40px auto; }
+  h1 { font-size: 2.4rem; background: linear-gradient(135deg, var(--rose), var(--amber), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.15; margin-bottom: 8px; }
+  h2 { font-size: 1.4rem; color: var(--amber); margin: 44px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  h3 { color: var(--text); margin: 18px 0 8px; font-size: 1.1rem; }
+  p { color: var(--muted); margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 28px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin: 18px 0; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 600; margin-right: 6px; }
+  .pill.bull { background: rgba(16,185,129,0.15); color: var(--emerald); }
+  .pill.bear { background: rgba(239,68,68,0.15); color: var(--red); }
+  .pill.neutral { background: rgba(148,163,184,0.15); color: var(--muted); }
+  .flow-diagram { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0; }
+  .flow-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+  .flow-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; font-size: 0.9rem; }
+  .flow-box.source { border-color: var(--amber); }
+  .flow-box.dest { border-color: var(--sky); }
+  .flow-arrow { color: var(--amber); font-size: 1.5rem; font-weight: 700; }
+  .flow-pct { font-size: 1.4rem; font-weight: 800; color: var(--amber); margin-top: 4px; }
+  .gauge { position: relative; height: 16px; background: linear-gradient(90deg, var(--emerald), var(--amber), var(--red)); border-radius: 8px; margin: 14px 0 6px; }
+  .gauge-marker { position: absolute; top: -6px; width: 4px; height: 28px; background: white; border-radius: 2px; transform: translateX(-2px); transition: left 0.4s; }
+  .gauge-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--dim); }
+  .slider-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; flex-wrap: wrap; }
+  .slider-row label { color: var(--muted); min-width: 160px; font-size: 0.9rem; }
+  input[type="range"] { flex: 1; min-width: 150px; accent-color: var(--amber); }
+  .slider-val { font-weight: 700; min-width: 50px; text-align: right; color: var(--amber); }
+  .scenario-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0; }
+  .scenario { background: var(--card); border-left: 4px solid var(--border); border-radius: 8px; padding: 16px 18px; cursor: pointer; transition: transform 0.15s, border-color 0.2s; }
+  .scenario:hover { transform: translateX(4px); }
+  .scenario.soft { border-left-color: var(--emerald); }
+  .scenario.stagflation { border-left-color: var(--amber); }
+  .scenario.crash { border-left-color: var(--red); }
+  .scenario.meltup { border-left-color: var(--violet); }
+  .scenario-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .scenario-prob { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+  .scenario-body { display: none; color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
+  .scenario.open .scenario-body { display: block; }
+  .threads { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+  .thread-tab { padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--muted); font-size: 0.88rem; background: transparent; transition: all 0.2s; }
+  .thread-tab.active { background: rgba(245,158,11,0.12); border-color: var(--amber); color: var(--amber); }
+  .thread-content { display: none; }
+  .thread-content.active { display: block; }
+  .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
+  @media (max-width: 500px) { .stat-grid { grid-template-columns: 1fr; } }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-num { font-size: 1.7rem; font-weight: 800; color: var(--amber); }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .qa { margin: 10px 0; }
+  .q { cursor: pointer; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; color: var(--text); font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .q::after { content: '+'; color: var(--amber); font-size: 1.3rem; }
+  .qa.open .q::after { content: '–'; }
+  .a { display: none; background: var(--card); border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; padding: 14px 16px; color: var(--muted); font-size: 0.93rem; margin-top: -1px; }
+  .qa.open .a { display: block; }
+  .callout { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(244,63,94,0.08)); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+  .callout strong { color: var(--amber); }
+  .callout.warning { background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(245,158,11,0.08)); border-color: rgba(239,68,68,0.3); }
+  .callout.warning strong { color: var(--red); }
+  table { width: 100%; border-collapse: collapse; color: var(--muted); font-size: 0.9rem; }
+  th { text-align: left; color: var(--text); padding: 8px; border-bottom: 1px solid var(--border); }
+  td { padding: 8px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  @media (max-width: 600px) {
+    h1 { font-size: 1.7rem; }
+    .container { padding: 0 4px; }
+    .flow-row { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<a href="/" style="position:fixed;top:14px;left:20px;z-index:100;font-size:12px;font-weight:600;color:#8b95a8;text-decoration:none;letter-spacing:0.5px;opacity:0.7;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Curated Intelligence</a>>
+<main class="container">
+
+<h1>Macro 2026: Money, AI, Oil &amp; War</h1>
+<p class="subtitle">Four threads tangling at once — pandemic money printing, the AI capex boom, China's deflationary export of compute, and Middle East oil shocks. Walk through them one by one, then see how they combine.</p>
+
+<div class="callout">
+  <strong>How to read this:</strong> Each thread is its own force. Start with Money Printing (what set the stage), then AI (where the money went), China (the deflationary counterweight), then Oil &amp; War (the wild card). Scenarios section combines them.
+</div>
+
+<h2>The Four Threads</h2>
+
+<div class="threads">
+  <button class="thread-tab active" onclick="switchThread('money')">💵 Money Printing</button>
+  <button class="thread-tab" onclick="switchThread('ai')">🤖 AI Bubble</button>
+  <button class="thread-tab" onclick="switchThread('china')">🇨🇳 China Factor</button>
+  <button class="thread-tab" onclick="switchThread('oil')">🛢️ Oil &amp; War</button>
+</div>
+
+<!-- MONEY -->
+<div class="thread-content active" id="t-money">
+  <div class="card">
+    <h3>2020–2024 money creation</h3>
+    <p>Fed's balance sheet went from <strong>$4.2T (Feb 2020)</strong> to <strong>$8.9T (April 2022)</strong>. $4.7 trillion of new money in 2 years. Add fiscal stimulus (CARES, ARP) and total US monetary+fiscal injection was ~<strong>$10 trillion — about 45% of pre-COVID US GDP</strong>.</p>
+    <p>Globally: ECB balance sheet doubled. BoJ kept buying. China stimulated via state banks. US M2 jumped 40% in 2 years — the fastest peacetime expansion in history.</p>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">$4.7T</div><div class="stat-label">Fed balance sheet growth 2020–2022</div></div>
+      <div class="stat"><div class="stat-num">40%</div><div class="stat-label">US M2 increase, 2020–2022</div></div>
+      <div class="stat"><div class="stat-num">9.1%</div><div class="stat-label">Peak US inflation (June 2022)</div></div>
+      <div class="stat"><div class="stat-num">~$10T</div><div class="stat-label">Total US stimulus</div></div>
+    </div>
+
+    <h3>Where did it actually go?</h3>
+    <p>Textbook answer: consumer prices. And yes, CPI hit 9.1%. But the bigger story is <strong>asset price inflation</strong>. Fed-created money goes to banks, then financial markets, then trickles into the real economy.</p>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <div class="flow-box source"><strong>Fed creates $4.7T</strong><div class="flow-pct">100%</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box dest"><strong>Banks &amp; primary dealers</strong></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box source"><strong>Banks/dealers</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box dest"><strong>Asset markets</strong><div style="font-size:0.8rem;color:var(--muted);margin-top:4px;">stocks, bonds, property, crypto</div></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box source"><strong>Fiscal (gov't checks)</strong><div class="flow-pct">~$5T</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box dest"><strong>Households</strong> → consumer goods + assets</div>
+      </div>
+    </div>
+
+    <h3>Asset price evidence</h3>
+    <table>
+      <thead><tr><th>Asset</th><th>2020 → 2024</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>S&amp;P 500</td><td>+95%</td><td>~2,200 → ~4,300+</td></tr>
+        <tr><td>Nasdaq 100</td><td>+140%</td><td>Tech took the lion's share</td></tr>
+        <tr><td>US median home</td><td>+45%</td><td>$280K → $410K</td></tr>
+        <tr><td>Bitcoin</td><td>+450%</td><td>$7K → $40–100K range</td></tr>
+        <tr><td>Mag 7 market cap</td><td>+250%</td><td>~$5T → $17T+ peak</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>The honest answer:</strong> Of that $10T, roughly $3–4T ended up in equity markets (directly or via P/E expansion), $1–2T in property, $1T in crypto/alt assets, the rest flowed through the real economy creating 2021–2023 consumer inflation. Asset prices haven't deflated because the money is still there — it sits in Mag 7 stocks and homes nobody can afford.
+    </div>
+  </div>
+</div>
+
+<!-- AI -->
+<div class="thread-content" id="t-ai">
+  <div class="card">
+    <h3>The AI capex super-cycle</h3>
+    <p>Since ChatGPT (Nov 2022), AI capex has gone vertical. Microsoft, Google, Amazon, Meta + Oracle and CoreWeave spend <strong>~$300B/year on AI infrastructure</strong> (2025). Projected <strong>$500B+ in 2026</strong> — more than the entire global semiconductor industry's annual revenue 5 years ago.</p>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">~$300B</div><div class="stat-label">2025 hyperscaler AI capex</div></div>
+      <div class="stat"><div class="stat-num">$3.5T</div><div class="stat-label">Nvidia market cap (peak)</div></div>
+      <div class="stat"><div class="stat-num">35–40%</div><div class="stat-label">S&amp;P 500 weight in top 7</div></div>
+      <div class="stat"><div class="stat-num">&lt;$40B</div><div class="stat-label">Actual AI product revenue</div></div>
+    </div>
+
+    <h3>Why this is a bubble setup</h3>
+    <p>The math has a hole. Hyperscalers spend $300B/yr. AI revenue (genuinely attributable to AI products, not legacy cloud rebranded) is maybe $30–40B/yr. The gap is justified by promise of future returns — AI must become a transformative cash-flow machine, not just a useful tool.</p>
+
+    <h3>Bubble pressure gauge — adjust the inputs</h3>
+    <div class="slider-row">
+      <label>AI capex growth (yr)</label>
+      <input type="range" id="capex" min="0" max="100" value="60" oninput="updateGauge()">
+      <span class="slider-val" id="capexVal">60%</span>
+    </div>
+    <div class="slider-row">
+      <label>AI revenue growth (yr)</label>
+      <input type="range" id="rev" min="0" max="200" value="80" oninput="updateGauge()">
+      <span class="slider-val" id="revVal">80%</span>
+    </div>
+    <div class="slider-row">
+      <label>Nvidia forward P/E</label>
+      <input type="range" id="pe" min="15" max="80" value="35" oninput="updateGauge()">
+      <span class="slider-val" id="peVal">35x</span>
+    </div>
+
+    <div class="gauge"><div class="gauge-marker" id="gauge" style="left: 55%;"></div></div>
+    <div class="gauge-labels"><span>Sustainable</span><span>Frothy</span><span>Bubble</span></div>
+    <p id="gaugeMsg" style="margin-top:12px;font-weight:600;color:var(--amber);"></p>
+
+    <h3>The two outcomes</h3>
+    <div class="scenario-grid">
+      <div class="scenario soft" onclick="toggleScenario(this)">
+        <div class="scenario-title"><span>AI delivers</span><span class="pill bull">Bull case</span></div>
+        <div class="scenario-body">Real productivity gains arrive. Enterprises adopt AI agents at scale, automating 20–30% of knowledge work. Revenue catches up to capex by 2027–2028. Mag 7 keep their valuations. AI is deflationary on labour, so inflation stays tame. Stock market grinds higher.</div>
+      </div>
+      <div class="scenario crash" onclick="toggleScenario(this)">
+        <div class="scenario-title"><span>Capex outruns revenue</span><span class="pill bear">Bear case</span></div>
+        <div class="scenario-body">Hyperscalers realise unit economics don't work. Inference costs collapse (China factor below). Capex gets cut hard. Nvidia revenue falls 30–50%. Mag 7 re-rate down. Since they're 35% of S&amp;P, the index drops 25–40%. Every pension fund and 401(k) takes the hit. This is dotcom 2000 but bigger because concentration is higher.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHINA -->
+<div class="thread-content" id="t-china">
+  <div class="card">
+    <h3>The China deflation export</h3>
+    <p>Two things happening in China affect everyone else:</p>
+
+    <h3>1. Domestic deflation</h3>
+    <p>China's property crash (Evergrande, Country Garden) created a balance-sheet recession. Consumers don't spend. Producer prices have been negative for over 2 years. To keep factories running, China is <strong>exporting deflation</strong> — selling EVs, solar panels, steel, chemicals abroad at prices that crush Western competitors. This kept US/EU goods inflation low even as services inflation stayed sticky.</p>
+
+    <h3>2. The compute disruption (DeepSeek shock)</h3>
+    <p>DeepSeek's R1 (Jan 2025) showed that frontier-quality reasoning could be trained for ~<strong>$6M</strong> instead of the assumed $100M+. Follow-on releases from Qwen, Kimi, GLM, MiniMax confirmed it wasn't a one-off. Open-weight models are now closing the gap with closed US frontier labs — at a fraction of the compute cost.</p>
+
+    <div class="callout warning">
+      <strong>Why this matters for the bubble:</strong> If inference and training can be done 10–100x cheaper than the hyperscaler bet assumed, the $300B/yr capex thesis cracks. You don't need a million H100s if a thousand H800s with smarter algorithms get you 90% of the way. The market briefly understood this in Jan 2025 (Nvidia dropped 17% in a day) but then forgot.
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">$6M</div><div class="stat-label">DeepSeek R1 reported training cost</div></div>
+      <div class="stat"><div class="stat-num">-17%</div><div class="stat-label">Nvidia 1-day drop, Jan 2025</div></div>
+      <div class="stat"><div class="stat-num">~2 yr</div><div class="stat-label">China PPI in deflation</div></div>
+      <div class="stat"><div class="stat-num">60%+</div><div class="stat-label">China share of global EV exports</div></div>
+    </div>
+
+    <h3>What China changes</h3>
+    <ul style="color:var(--muted);padding-left:20px;">
+      <li><strong>Deflationary pressure on goods</strong> — masks the underlying monetary inflation. Without China, US CPI would be ~5–6% not 2.5%.</li>
+      <li><strong>Compute commoditisation</strong> — open models + cheap inference threaten the moat hyperscalers are betting on.</li>
+      <li><strong>Geopolitical risk</strong> — Taiwan/TSMC is the single biggest tail risk for the AI thesis. If Taiwan goes hot, Nvidia goes to zero overnight.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- OIL -->
+<div class="thread-content" id="t-oil">
+  <div class="card">
+    <h3>Middle East: the oil/inflation wild card</h3>
+    <p>The 2023–2025 escalation cycle — Israel-Hamas, Israel-Hezbollah, Israel-Iran direct strikes, Houthi attacks on Red Sea shipping — keeps a structural risk premium in oil. Brent has traded $70–95 instead of the $50–65 you'd expect given soft Chinese demand.</p>
+
+    <h3>What an oil spike does to markets</h3>
+    <p>Oil at $100+ is the fastest way to break the current goldilocks setup. Mechanism:</p>
+    <ul style="color:var(--muted);padding-left:20px;">
+      <li>Oil up → headline inflation up</li>
+      <li>Headline inflation up → Fed can't cut rates (or has to hike)</li>
+      <li>Rates stay high → P/E compression on growth stocks (AI / Mag 7)</li>
+      <li>P/E compression on Mag 7 → S&amp;P 500 drops</li>
+      <li>Plus: consumers spend more on petrol, less on everything else — recession risk rises</li>
+    </ul>
+
+    <h3>The Strait of Hormuz tail risk</h3>
+    <p>~20% of global oil and a third of LNG flow through the Strait of Hormuz. If Iran decides to close it (mining, attacks on tankers), oil could spike to $150–200 within days. The single biggest near-term shock to the macro picture.</p>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">20%</div><div class="stat-label">Global oil through Hormuz</div></div>
+      <div class="stat"><div class="stat-num">$70–95</div><div class="stat-label">Brent range despite weak demand</div></div>
+      <div class="stat"><div class="stat-num">$150+</div><div class="stat-label">Hormuz-closure spike estimate</div></div>
+      <div class="stat"><div class="stat-num">+3–4%</div><div class="stat-label">CPI impact from $50 oil spike</div></div>
+    </div>
+
+    <div class="callout warning">
+      <strong>The cruel irony:</strong> Oil shocks are stagflationary. They hurt growth (consumers poorer) AND raise inflation (cost-push). Fed has no good response — cutting feeds inflation, hiking deepens recession. 1973 and 1979 are the templates.
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIOS -->
+<h2>How they combine: 4 scenarios</h2>
+<p>Stack the threads. Tap each scenario for the full story. Probabilities are rough estimates, not predictions.</p>
+
+<div class="scenario-grid">
+  <div class="scenario soft" onclick="toggleScenario(this)">
+    <div class="scenario-title"><span>1. Soft landing &amp; AI productivity</span><span class="scenario-prob">~25% • <span class="pill bull">Bull</span></span></div>
+    <div class="scenario-body">
+      <p>AI revenue catches up to capex. China continues to export deflation, holding goods prices down. Middle East de-escalates after a ceasefire. Fed cuts 2–3 times. Inflation settles at 2.5%. S&amp;P grinds to new highs. Property holds.</p>
+      <p><strong>Winners:</strong> Equities (especially mid-caps that lagged), real estate. <strong>Losers:</strong> Gold, defensive plays.</p>
+      <p><strong>Watch for:</strong> Hyperscaler earnings showing genuine AI revenue acceleration. Microsoft Azure AI breaking out as a distinct line. Enterprise AI agent adoption metrics.</p>
+    </div>
+  </div>
+
+  <div class="scenario meltup" onclick="toggleScenario(this)">
+    <div class="scenario-title"><span>2. Liquidity-driven melt-up</span><span class="scenario-prob">~20% • <span class="pill bull">Bull (then bear)</span></span></div>
+    <div class="scenario-body">
+      <p>The Fed cuts despite sticky inflation (political pressure, debt servicing costs forcing the issue). Combined with US Treasury issuance and global central bank easing, real rates go negative again. Asset prices melt up — S&amp;P 7,000+, Bitcoin $200K, property doubles in some markets. Bubble inflates further until something breaks (usually credit).</p>
+      <p><strong>Winners initially:</strong> Everything risk-on, especially crypto, leveraged tech, marginal real estate. <strong>Losers eventually:</strong> Anyone holding bonds, anyone late to the party.</p>
+      <p><strong>Watch for:</strong> Real yields turning negative again. Sudden weakening of the dollar. Gold breaking out (currently above $2,500 — watch $3,000 as confirmation).</p>
+    </div>
+  </div>
+
+  <div class="scenario stagflation" onclick="toggleScenario(this)">
+    <div class="scenario-title"><span>3. Oil shock stagflation</span><span class="scenario-prob">~30% • <span class="pill bear">Bear</span></span></div>
+    <div class="scenario-body">
+      <p>Iran closes Hormuz or major Saudi infrastructure gets hit. Oil to $130–180. Headline inflation back to 6–8%. Fed forced to hold or hike. Growth stocks compress. Mag 7 down 30–40%. Property freezes (no buyers at higher mortgage rates). Wealth-effect reversal triggers consumer pullback. Recession by mid-2026.</p>
+      <p><strong>Winners:</strong> Energy producers, defence stocks, gold, US dollar, short-duration bonds. <strong>Losers:</strong> Tech, real estate, anything debt-financed.</p>
+      <p><strong>Watch for:</strong> Tanker insurance rates in the Gulf. Saudi oil infrastructure incidents. Brent breaking above $100 for sustained periods.</p>
+    </div>
+  </div>
+
+  <div class="scenario crash" onclick="toggleScenario(this)">
+    <div class="scenario-title"><span>4. AI bubble unwind</span><span class="scenario-prob">~25% • <span class="pill bear">Bear</span></span></div>
+    <div class="scenario-body">
+      <p>A second DeepSeek-style shock plus a hyperscaler signaling capex cuts triggers the unwind. Compute commoditises. Nvidia revenue guidance disappoints. Mag 7 re-rate from ~30x forward earnings to ~18x — fair value but a brutal repricing. S&amp;P drops 30–40%. Property follows with a 6–12 month lag as wealth-effect reversal bites.</p>
+      <p><strong>Winners:</strong> Cash, short bonds, value stocks, gold. <strong>Losers:</strong> Anyone heavy in tech indices, leveraged real estate.</p>
+      <p><strong>Watch for:</strong> Hyperscaler earnings calls where one of the big four guides capex DOWN. Nvidia data-center revenue growth dropping below 30% y/y. Open-source models matching frontier closed models on benchmarks.</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>The 5th option:</strong> Mix of these. Real markets don't choose one scenario — they run through several. We could see a melt-up in late 2026 followed by a stagflation shock in 2027. Or a brief AI panic followed by a productivity-led recovery.
+</div>
+
+<!-- INTERCONNECTIONS -->
+<h2>Why this moment is hard to read</h2>
+<div class="card">
+  <p>The threads can <em>cancel each other out</em> in non-obvious ways:</p>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Money printing + China deflation</strong> = asset bubble + low CPI. Inflation in stocks/property but not in supermarket prices. This is why central banks haven't reversed course aggressively.</li>
+    <li><strong>AI capex + China compute</strong> = Western hyperscalers spend $300B/yr on a thesis that Chinese open models are eating away at. Dangerous asymmetry.</li>
+    <li><strong>Oil + Fed</strong> = Fed loses optionality. With $36T national debt, the US can't sustain 5%+ rates for long, but oil shocks would force them.</li>
+    <li><strong>AI productivity + labour disinflation</strong> = if AI works, it pushes wages down (or job counts down). That's deflationary, which gives the Fed cover to ease, which feeds the asset bubble. Circular.</li>
+  </ul>
+</div>
+
+<!-- WHAT TO WATCH -->
+<h2>Signals to watch (free public data)</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Signal</th><th>Where</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Fed balance sheet</td><td>fred.stlouisfed.org — WALCL</td><td>Liquidity tide</td></tr>
+      <tr><td>10Y Treasury yield</td><td>FRED — DGS10</td><td>Inflation expectations + risk appetite</td></tr>
+      <tr><td>Nvidia DC revenue growth</td><td>Quarterly earnings</td><td>AI capex sustainability</td></tr>
+      <tr><td>Brent crude</td><td>Any quote service</td><td>Inflation pressure</td></tr>
+      <tr><td>China PPI</td><td>NBS monthly release</td><td>Global goods deflation</td></tr>
+      <tr><td>SOFR / repo rates</td><td>NY Fed</td><td>Funding market stress</td></tr>
+      <tr><td>VIX</td><td>cboe.com</td><td>Equity fear gauge</td></tr>
+      <tr><td>Gold price</td><td>Any quote service</td><td>Currency debasement hedge demand</td></tr>
+      <tr><td>Tanker insurance rates</td><td>Lloyd's List, S&amp;P Platts</td><td>Strait of Hormuz risk</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<h2>Common questions</h2>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">Why hasn't all that money printing caused hyperinflation?</div>
+  <div class="a">It did — in asset prices. CPI peaked at 9.1% and would have been higher without China's deflationary export. Most of the new money sits in financial assets (Mag 7 stocks, real estate) where it doesn't show up in CPI. The wealth-effect inflation is real but invisible to the official inflation rate.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">Is AI really a bubble or the next industrial revolution?</div>
+  <div class="a">Both, possibly. The internet was both — 1999–2000 was a real bubble (Pets.com died), but the underlying technology was transformative. Amazon survived and became a trillion-dollar company. AI is likely the same: real long-term productivity gains, but current valuations price in 100% success when reality will be 30–50%. The unwind, when it comes, won't kill AI — it'll kill the marginal AI investments.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">Why does China's DeepSeek matter so much?</div>
+  <div class="a">The entire $300B/yr hyperscaler thesis assumes you need vast Nvidia compute clusters to be competitive in AI. If a Chinese lab can match frontier US models with 1/10th the compute, the moat collapses. Hyperscalers built data centres for a world that may not exist. Even if DeepSeek's $6M figure is exaggerated, the directional point holds: efficiency gains compound, capex demand falls.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">What about gold and Bitcoin as hedges?</div>
+  <div class="a">Gold has worked — broke $2,500, sustainably above $2,400. Pricing in currency debasement plus geopolitical risk. Bitcoin is more ambiguous — correlates with risk assets (NDX) most of the time, but spikes on monetary shock events. Both are reasonable diversifiers but neither is a free lunch. Gold for stagflation; Bitcoin for melt-up; cash for the bubble unwind.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">Could the Fed bail everything out again?</div>
+  <div class="a">They have less ammunition. In 2020, debt-to-GDP was 105% — now it's 125%+. Each new round of QE costs more in lost dollar credibility. The Fed can still print, but the marginal effectiveness is falling and the inflation cost is rising. The "Fed put" exists but the strike price keeps dropping.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">South Africa angle?</div>
+  <div class="a">SA is a small open economy that imports global moves. Stagflation scenario = rand weakens, JSE flat/down, gold miners win (Harmony, Goldfields). AI bubble unwind = JSE small/midcap less hurt than US (less tech concentration); rand weakens on risk-off. Melt-up = rand strengthens briefly, JSE follows global tech up. Property: SA real estate already in slow-bleed mode — no scenario helps much. Cash in ZAR is a slow loss; cash in USD is a better hedge.</div>
+</div>
+
+<div class="qa" onclick="toggleQA(this)">
+  <div class="q">What would I do if I had to position now?</div>
+  <div class="a">Not financial advice, just a framework: barbell. Cash + gold + short-duration bonds on one end (30–40%) to weather any of the bear scenarios. Selective equity exposure on the other end (40–50%) — NOT pure index because of Mag 7 concentration. Prefer equal-weight S&amp;P, international (especially Japan, India), energy, defence. 10–20% in alternatives (real assets, gold miners, small BTC allocation). The point isn't to predict — it's to be okay in 3 of the 4 scenarios.</div>
+</div>
+
+<!-- TIMELINE -->
+<h2>Timeline: how we got here</h2>
+<div class="card">
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Mar 2020:</strong> Fed cuts to zero, restarts QE. Pandemic stimulus begins.</li>
+    <li><strong>2020–2021:</strong> $4.7T balance sheet expansion + $5T fiscal stimulus. Asset prices explode.</li>
+    <li><strong>Mar 2022:</strong> Fed starts hiking aggressively. Inflation peaks at 9.1% in June.</li>
+    <li><strong>Nov 2022:</strong> ChatGPT launches. AI capex thesis begins.</li>
+    <li><strong>2023:</strong> Banking mini-crisis (SVB), Fed provides backstop. Mag 7 leads market.</li>
+    <li><strong>Oct 2023:</strong> Israel-Hamas war begins. Middle East risk premium returns to oil.</li>
+    <li><strong>2024:</strong> Nvidia hits $3T+ market cap. Property stabilises at higher levels. Fed begins cutting.</li>
+    <li><strong>Jan 2025:</strong> DeepSeek R1 release. Nvidia drops 17% in a day, then recovers.</li>
+    <li><strong>2025:</strong> AI capex accelerates. Mag 7 concentration hits 40% of S&amp;P. Middle East escalation continues. Oil holds $70–95.</li>
+    <li><strong>Now (mid 2026):</strong> All four threads still active and unresolved.</li>
+  </ul>
+</div>
+
+<div class="callout">
+  <strong>The bottom line:</strong> The post-2020 money flood inflated asset prices. AI capex absorbed a chunk and created a new bubble candidate. China is the deflationary counterweight that's masked goods inflation but threatens the AI moat. Middle East is the wild card that could break the goldilocks setup overnight. None of the threads are resolved. The next 18–24 months will determine which scenario plays out.
+</div>
+
+<p style="text-align:center;margin-top:40px;color:var(--muted);font-size:0.85rem;">Not financial advice. Built for understanding, not prescription. Numbers are approximations as of mid-2026.</p>
+
+<div style="text-align:center;padding:20px 0 0"><a href="/" style="display:inline-block;padding:8px 24px;border:1px solid #252d3d;border-radius:8px;color:#8b95a8;text-decoration:none;font-size:13px;font-weight:500;transition:border-color 0.2s,color 0.2s">← Curated Intelligence</a></div>
+</main>
+
+<script>
+function switchThread(id) {
+  document.querySelectorAll('.thread-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.thread-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('t-' + id).classList.add('active');
+}
+
+function toggleScenario(el) { el.classList.toggle('open'); }
+function toggleQA(el) { el.classList.toggle('open'); }
+
+function updateGauge() {
+  const capex = parseInt(document.getElementById('capex').value);
+  const rev = parseInt(document.getElementById('rev').value);
+  const pe = parseInt(document.getElementById('pe').value);
+
+  document.getElementById('capexVal').textContent = capex + '%';
+  document.getElementById('revVal').textContent = rev + '%';
+  document.getElementById('peVal').textContent = pe + 'x';
+
+  const gap = Math.max(0, capex - rev * 0.5);
+  const peScore = Math.max(0, pe - 20) * 1.5;
+  const score = Math.min(100, gap + peScore);
+
+  document.getElementById('gauge').style.left = score + '%';
+
+  const msg = document.getElementById('gaugeMsg');
+  if (score < 30) msg.textContent = '✅ Sustainable — revenue catching up, valuations reasonable.';
+  else if (score < 55) msg.textContent = '⚡ Frothy — valuations stretched but not detached from fundamentals.';
+  else if (score < 75) msg.textContent = '⚠️ Bubble territory — capex outrunning revenue, multiples elevated.';
+  else msg.textContent = '🔴 Late-stage bubble — the music can stop at any time.';
+}
+updateGauge();
+</script>
+</body>
+</html>
