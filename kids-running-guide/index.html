@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Run Wild! A Beginner's Running Guide for Kids</title>
+<style>
+  :root {
+    --bg: #0f1720;
+    --card: #151e2b;
+    --border: #1e2d3d;
+    --text: #c8d2e0;
+    --muted: #6b7d95;
+    --accent: #f59e0b;
+    --green: #10b981;
+    --pink: #ec4899;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --red: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 720px; margin: 60px auto 0 auto; }
+  h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  h3 { font-size: 1.2rem; color: var(--text); margin: 20px 0 10px; }
+  p { margin-bottom: 16px; color: var(--muted); }
+  .subtitle { font-size: 1.1rem; color: var(--muted); margin-bottom: 30px; }
+  .emoji { font-size: 1.4em; vertical-align: middle; margin-right: 6px; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+  .tip-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(236,72,153,0.08));
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .tip-box strong { color: var(--accent); }
+
+  /* Interactive: Progress Tracker */
+  .progress-section { margin: 30px 0; }
+  .progress-bar-outer {
+    background: var(--border);
+    border-radius: 20px;
+    height: 24px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    border-radius: 20px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .progress-btn {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    margin: 4px;
+  }
+  .progress-btn:hover { transform: scale(1.03); }
+  .progress-btn:active { transform: scale(0.97); }
+  .progress-btn.reset { background: var(--muted); }
+  .progress-stats { font-size: 1.1rem; color: var(--text); margin: 8px 0; font-weight: 600; }
+  .streak-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--pink));
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 8px 0;
+  }
+
+  /* Interactive: Stretch Timer */
+  .timer-display {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    margin: 10px 0;
+  }
+  .timer-label { text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+  .timer-btns { text-align: center; }
+  .timer-btn {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 4px;
+    transition: transform 0.15s;
+  }
+  .timer-btn:hover { transform: scale(1.03); }
+  .timer-btn.stop { background: var(--red); }
+  .timer-btn.reset { background: var(--muted); }
+
+  /* Interactive: Pace Calculator */
+  .calc-row { display: flex; gap: 12px; align-items: center; margin: 10px 0; flex-wrap: wrap; }
+  .calc-row label { color: var(--muted); font-size: 0.9rem; min-width: 70px; }
+  .calc-row input {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    width: 100px;
+  }
+  .calc-result {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--green);
+    margin: 14px 0;
+  }
+
+  /* Quiz */
+  .quiz-q { margin: 16px 0; }
+  .quiz-q p { color: var(--text); font-weight: 600; margin-bottom: 8px; }
+  .quiz-opt {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 6px 0;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  .quiz-opt:hover { border-color: var(--blue); }
+  .quiz-opt.correct { border-color: var(--green); background: rgba(16,185,129,0.1); }
+  .quiz-opt.wrong { border-color: var(--red); background: rgba(239,68,68,0.1); }
+  .quiz-feedback { font-size: 0.9rem; margin-top: 6px; font-weight: 600; }
+  .quiz-feedback.good { color: var(--green); }
+  .quiz-feedback.bad { color: var(--red); }
+
+  /* Fun Facts */
+  .fact-box {
+    background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(59,130,246,0.12));
+    border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .fact-box:hover { border-color: var(--purple); }
+  .fact-box .fact-title { color: var(--purple); font-weight: 700; }
+  .fact-box .fact-content { margin-top: 8px; display: none; color: var(--muted); }
+  .fact-box.open .fact-content { display: block; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .checklist li::before {
+    content: '☐ ';
+    font-size: 1.2rem;
+    color: var(--border);
+    margin-right: 8px;
+  }
+  .checklist li.done { color: var(--green); }
+  .checklist li.done::before { content: '☑ '; color: var(--green); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .container { padding: 0 10px; }
+    .calc-row { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* Fun highlight words */
+  .hl { color: var(--accent); font-weight: 600; }
+  .hl-pink { color: var(--pink); font-weight: 600; }
+  .hl-green { color: var(--green); font-weight: 600; }
+  .hl-blue { color: var(--blue); font-weight: 600; }
+</style>
+</head>
+<body>
+<a href="/" style="position:fixed;top:14px;left:20px;z-index:100;font-size:12px;font-weight:600;color:#8b95a8;text-decoration:none;letter-spacing:0.5px;opacity:0.7;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Curated Intelligence</a>>
+<main class="container">
+
+<h1>🏃 Run Wild!</h1>
+<p class="subtitle">A beginner's guide to running — made for kids aged 8–12. Let's get moving! 🎉</p>
+
+<!-- PROGRESS TRACKER -->
+<div class="card">
+  <h3>📊 Your Running Adventure</h3>
+  <p>Click <strong>+1 Run</strong> every time you go for a run! Can you hit 10 runs?</p>
+  <div class="progress-stats">
+    🏃 Runs: <span id="runCount">0</span> / 10
+    <span id="streakBadge" style="display:none;"></span>
+  </div>
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="progressBar"></div>
+  </div>
+  <div class="progress-labels">
+    <span>Start 🏁</span><span>5 runs</span><span>10 runs 🏆</span>
+  </div>
+  <div style="margin-top:14px;">
+    <button class="progress-btn" onclick="addRun()">➕ +1 Run</button>
+    <button class="progress-btn reset" onclick="resetRuns()">🔄 Reset</button>
+  </div>
+  <p id="encouragement" style="margin-top:10px;font-weight:600;color:var(--accent);"></p>
+</div>
+
+<h2><span class="emoji">🌟</span> Why Run?</h2>
+<p>Running is one of the <span class="hl">coolest</span> things you can do with your body. It doesn't need fancy equipment, you can do it almost anywhere, and every time you run, you get a little bit <span class="hl-green">stronger</span>, a little bit <span class="hl-blue">faster</span>, and a whole lot <span class="hl-pink">happier</span>.</p>
+
+<div class="tip-box">
+  <strong>💡 Fun fact:</strong> Your body releases special chemicals called <em>endorphins</em> when you run — scientists call it the "runner's high." It's like your brain giving you a high-five! ✋
+</div>
+
+<div class="card">
+  <h3>What running does for you:</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li>Makes your <span class="hl-pink">heart</span> stronger (it's a muscle — exercise it!)</li>
+    <li>Builds <span class="hl-green">strong bones</span> and muscles</li>
+    <li>Helps you <span class="hl-blue">sleep better</span> at night</li>
+    <li>Boosts your <span class="hl">mood</span> and confidence</li>
+    <li>Gives you <span class="hl-pink">more energy</span> during the day</li>
+    <li>Teaches you that <span class="hl-green">practice makes progress</span></li>
+  </ul>
+</div>
+
+<h2><span class="emoji">👟</span> Getting Started: Gear</h2>
+<p>You really only need <span class="hl">one thing</span>: a pair of comfortable trainers. That's the beauty of running.</p>
+
+<div class="card">
+  <h3>Your Running Kit Checklist</h3>
+  <p style="color:var(--muted);font-size:0.9rem;">Click each item you've got ready!</p>
+  <ul class="checklist" id="gearList">
+    <li onclick="toggleCheck(this)">Comfortable running shoes (not too tight!)</li>
+    <li onclick="toggleCheck(this)">Breathable t-shirt or vest</li>
+    <li onclick="toggleCheck(this)">Shorts or leggings (whatever feels good)</li>
+    <li onclick="toggleCheck(this)">Socks (no blisters please!)</li>
+    <li onclick="toggleCheck(this)">Water bottle</li>
+    <li onclick="toggleCheck(this)">Sunscreen &amp; a cap (if it's sunny)</li>
+  </ul>
+</div>
+
+<div class="tip-box">
+  <strong>👟 Shoe tip:</strong> Your running shoes should have about a thumb's width of space at the front. Feet swell a little when you run! And replace them every 400–500 km — that's roughly Cape Town to Knysna and back.
+</div>
+
+<h2><span class="emoji">🔥</span> Warming Up</h2>
+<p>Never skip your warmup! Cold muscles are like cold elastic bands — they can snap. Spend <span class="hl">5 minutes</span> getting your body ready.</p>
+
+<div class="card">
+  <h3>Dynamic Warmup (3 minutes each side)</h3>
+  <ol style="color:var(--muted);padding-left:20px;">
+    <li><strong>Leg swings</strong> — Hold onto a wall, swing one leg forward and back 10 times. Switch sides.</li>
+    <li><strong>Arm circles</strong> — Big circles forward 10 times, then backward 10 times.</li>
+    <li><strong>High knees (on the spot)</strong> — Jog in place, bringing knees up. 30 seconds.</li>
+    <li><strong>Butt kicks</strong> — Jog in place, kicking your heels toward your bum. 30 seconds.</li>
+    <li><strong>Walking lunges</strong> — Take big steps forward, bending both knees. 5 per leg.</li>
+  </ol>
+</div>
+
+<!-- STRETCH TIMER -->
+<div class="card">
+  <h3>⏱️ Post-Run Stretch Timer</h3>
+  <p style="color:var(--muted);">Hold each stretch for <strong>30 seconds</strong>. Use the timer!</p>
+  <div class="timer-display" id="timerDisplay">0:30</div>
+  <div class="timer-label" id="timerLabel">Ready?</div>
+  <div class="timer-btns">
+    <button class="timer-btn" onclick="startTimer(30)">▶️ 30s Stretch</button>
+    <button class="timer-btn" onclick="startTimer(60)">▶️ 60s Stretch</button>
+    <button class="timer-btn stop" onclick="stopTimer()">⏹️ Stop</button>
+    <button class="timer-btn reset" onclick="resetTimer()">🔄 Reset</button>
+  </div>
+  <div style="margin-top:14px;color:var(--muted);font-size:0.9rem;">
+    <strong>Stretches to do:</strong> Touch your toes 🦶 · Quad stretch (stand on one leg, pull heel to bum) 🦵 · Butterfly stretch 🦋 · Calf stretch (push against a wall) 🧱 · Arm across chest 💪
+  </div>
+</div>
+
+<h2><span class="emoji">🏃</span> How to Actually Run</h2>
+<p>There's no "perfect" way to run — everyone's body is different. But here are some tips that help <em>most</em> runners feel better:</p>
+
+<div class="card">
+  <h3>Running Form Basics</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Look ahead, not down</strong> — pick a spot about 10 metres in front of you</li>
+    <li><strong>Relax your shoulders</strong> — don't hunch them up by your ears!</li>
+    <li><strong>Arms swing front-to-back</strong> — not across your body</li>
+    <li><strong>Hands like you're holding a crisp</strong> — gentle fist, not clenched tight</li>
+    <li><strong>Land softly</strong> — aim for quiet feet. If you can hear yourself slapping the ground, try to land lighter</li>
+    <li><strong>Breathe in through your nose, out through your mouth</strong> — or whatever feels comfortable</li>
+  </ul>
+</div>
+
+<div class="tip-box">
+  <strong>🎮 Imagine this:</strong> Pretend there's a string attached to the top of your head, gently pulling you upward. That's your posture! Tall and relaxed.
+</div>
+
+<h2><span class="emoji">📈</span> Building Up Slowly</h2>
+<p>The biggest mistake new runners make? <span class="hl-pink">Doing too much, too soon.</span> Your muscles and bones need time to adapt. The rule is: increase by no more than <span class="hl">10% per week</span>.</p>
+
+<div class="card">
+  <h3>4-Week Beginner Plan</h3>
+  <table style="width:100%;color:var(--muted);border-collapse:collapse;">
+    <tr style="border-bottom:1px solid var(--border);">
+      <th style="padding:10px 8px;text-align:left;color:var(--text);">Week</th>
+      <th style="padding:10px 8px;text-align:left;color:var(--text);">Mon</th>
+      <th style="padding:10px 8px;text-align:left;color:var(--text);">Wed</th>
+      <th style="padding:10px 8px;text-align:left;color:var(--text);">Fri/Sat</th>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:10px 8px;font-weight:600;">1</td>
+      <td style="padding:10px 8px;">Walk 1 min / Run 1 min × 6</td>
+      <td style="padding:10px 8px;">Walk 1 min / Run 1 min × 6</td>
+      <td style="padding:10px 8px;">Walk 1 min / Run 2 min × 5</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:10px 8px;font-weight:600;">2</td>
+      <td style="padding:10px 8px;">Walk 1 min / Run 2 min × 5</td>
+      <td style="padding:10px 8px;">Walk 1 min / Run 3 min × 4</td>
+      <td style="padding:10px 8px;">Run 5 min / Walk 1 min × 3</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:10px 8px;font-weight:600;">3</td>
+      <td style="padding:10px 8px;">Run 5 min / Walk 1 min × 3</td>
+      <td style="padding:10px 8px;">Run 8 min / Walk 1 min × 2</td>
+      <td style="padding:10px 8px;">Run 10 min straight! 🎉</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 8px;font-weight:600;">4</td>
+      <td style="padding:10px 8px;">Run 10 min / Walk 1 min × 2</td>
+      <td style="padding:10px 8px;">Run 15 min straight!</td>
+      <td style="padding:10px 8px;">Run 20 min — you're a runner! 🏆</td>
+    </tr>
+  </table>
+</div>
+
+<!-- PACE CALCULATOR -->
+<div class="card">
+  <h3>🧮 How Far Did You Go?</h3>
+  <p style="color:var(--muted);">If you know how long you ran and roughly how far, figure out your pace!</p>
+  <div class="calc-row">
+    <label>Minutes:</label>
+    <input type="number" id="calcMins" value="10" min="1" max="120" oninput="calcPace()">
+    <label>Distance (km):</label>
+    <input type="number" id="calcDist" value="1.5" min="0.1" max="50" step="0.1" oninput="calcPace()">
+  </div>
+  <div class="calc-result" id="calcResult">Your pace: 6:40 per km</div>
+</div>
+
+<h2><span class="emoji">🎮</span> Make It Fun!</h2>
+<p>Running doesn't have to be all serious. Here are some games to play while you run:</p>
+
+<div class="card">
+  <h3>Running Games</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>🔴🟢 Red Light, Green Light</strong> — Someone shouts "green light" to run, "red light" to freeze. Try it with friends!</li>
+    <li><strong>🏷️ Tag variations</strong> — Freeze tag, tunnel tag (crawl through legs to unfreeze), shadow tag (step on someone's shadow)</li>
+    <li><strong>🗺️ Explore &amp; Map</strong> — Pick a new route each time. Draw a map of where you ran afterward.</li>
+    <li><strong>🎵 Music Miles</strong> — Make a playlist of your favourite songs and run for the whole playlist.</li>
+    <li><strong>🦸 Superhero Sprints</strong> — Between two lamp posts, you're The Flash. Then walk to recover. Repeat!</li>
+    <li><strong>🔢 Counting Game</strong> — Count how many dogs, blue cars, or red doors you see on your run.</li>
+  </ul>
+</div>
+
+<h2><span class="emoji">🧠</span> Quiz Time!</h2>
+<p style="color:var(--muted);">Think you've got the basics? Test yourself!</p>
+
+<div class="card" id="quiz">
+  <div class="quiz-q" id="q1">
+    <p>1. What should you ALWAYS do before running?</p>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q1')">Eat a big meal 🍔</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'correct', 'q1')">Warm up for 5 minutes 🔥</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q1')">Stretch cold muscles until it hurts 😣</span>
+  </div>
+  <div class="quiz-q" id="q2">
+    <p>2. How much should you increase your running each week?</p>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q2')">Double it! 🚀</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'correct', 'q2')">No more than 10% 📈</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q2')">Just run until you can't 🥵</span>
+  </div>
+  <div class="quiz-q" id="q3">
+    <p>3. What's the most important piece of gear?</p>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q3')">Expensive headphones 🎧</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'correct', 'q3')">Comfortable running shoes 👟</span>
+    <span class="quiz-opt" onclick="checkQuiz(this, 'wrong', 'q3')">A fitness watch ⌚</span>
+  </div>
+</div>
+
+<h2><span class="emoji">💧</span> Staying Safe &amp; Hydrated</h2>
+
+<div class="card">
+  <h3>Safety Rules 🛡️</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Always tell an adult</strong> where you're going and when you'll be back</li>
+    <li><strong>Run with a buddy</strong> or in a safe area where adults are around</li>
+    <li><strong>Face traffic</strong> if you're on a road — so you can see cars coming</li>
+    <li><strong>Wear bright colours</strong> so drivers can see you</li>
+    <li><strong>Stop if something hurts</strong> — pain is your body's way of saying "slow down"</li>
+    <li><strong>Drink water</strong> before, during (if it's hot), and after your run</li>
+  </ul>
+</div>
+
+<div class="tip-box">
+  <strong>💧 Hydration rule:</strong> Drink when you're thirsty. If your pee is dark yellow, you need more water. Light yellow = you're good to go!
+</div>
+
+<!-- FUN FACTS -->
+<h2><span class="emoji">💡</span> Fun Running Facts</h2>
+<p style="color:var(--muted);">Click each one to reveal the fact!</p>
+
+<div class="fact-box" onclick="this.classList.toggle('open')">
+  <div class="fact-title">🐆 Fastest animal on land?</div>
+  <div class="fact-content">The cheetah can run at 112 km/h — that's faster than most cars are allowed to drive! A cheetah would finish a 100m race in about 3 seconds.</div>
+</div>
+
+<div class="fact-box" onclick="this.classList.toggle('open')">
+  <div class="fact-title">🦴 How many bones in your foot?</div>
+  <div class="fact-content">Each foot has 26 bones, 33 joints, and over 100 muscles and tendons. Your feet are engineering marvels — treat them well!</div>
+</div>
+
+<div class="fact-box" onclick="this.classList.toggle('open')">
+  <div class="fact-title">🌍 Longest race in the world?</div>
+  <div class="fact-content">The Self-Transcendence 3100 Mile Race in New York takes runners 52 days to finish. They run about 95 km <em>every single day</em>. That's more than two marathons daily!</div>
+</div>
+
+<div class="fact-box" onclick="this.classList.toggle('open')">
+  <div class="fact-title">👶 Youngest marathon runner?</div>
+  <div class="fact-content">Budhia Singh of India ran 48 marathons before the age of 5. (Don't try this — his story is controversial, and kids your age should focus on fun, short runs!)</div>
+</div>
+
+<h2><span class="emoji">🏁</span> Your First 5K</h2>
+<p>Once you can run for <span class="hl">20 minutes</span> without stopping, you're ready to think about your first 5K! That's 5 kilometres — about 12 laps of a standard running track.</p>
+
+<div class="card">
+  <h3>5K Timeline</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Weeks 1–4:</strong> Follow the beginner plan above (run/walk intervals)</li>
+    <li><strong>Weeks 5–8:</strong> Run without stopping, adding 1–2 minutes each week</li>
+    <li><strong>Week 8+:</strong> Run 30 minutes continuously = roughly a 5K!</li>
+    <li><strong>Goal:</strong> Your first parkrun (free, timed 5K every Saturday morning) 🎉</li>
+  </ul>
+</div>
+
+<div class="tip-box">
+  <strong>🏅 Did you know?</strong> <em>parkrun</em> is a free, weekly 5K event held in parks all over South Africa and the world. You can walk, jog, or run. There's no time limit, and it's super welcoming to kids. Find one near you at <a href="https://www.parkrun.co.za" style="color:var(--blue);" target="_blank">parkrun.co.za</a>.
+</div>
+
+<h2><span class="emoji">✅</span> Quick-Start Summary</h2>
+
+<div class="card" style="border:2px solid var(--green);">
+  <ol style="color:var(--muted);padding-left:20px;">
+    <li>Put on comfortable shoes 👟</li>
+    <li>Warm up for 5 minutes 🔥</li>
+    <li>Start with walk/run intervals (like 1 min run, 1 min walk) ⏱️</li>
+    <li>Run 3 times a week with rest days in between 📅</li>
+    <li>Stretch after each run (use the timer above!) 🧘</li>
+    <li>Drink water 💧</li>
+    <li>Have fun! That's the most important rule 🎉</li>
+  </ol>
+</div>
+
+<p style="text-align:center;margin-top:40px;color:var(--muted);font-size:0.9rem;">Made with ❤️ for young runners everywhere.</p>
+
+<div style="text-align:center;padding:20px 0 0"><a href="/" style="display:inline-block;padding:8px 24px;border:1px solid #252d3d;border-radius:8px;color:#8b95a8;text-decoration:none;font-size:13px;font-weight:500;transition:border-color 0.2s,color 0.2s">← Curated Intelligence</a></div>
+</main>
+
+<script>
+// Progress Tracker
+let runCount = parseInt(localStorage.getItem('kidRunCount') || '0');
+let lastRunDate = localStorage.getItem('kidLastRunDate') || '';
+updateProgress();
+
+function addRun() {
+  const today = new Date().toDateString();
+  if (lastRunDate === today) {
+    document.getElementById('encouragement').innerHTML = '⚠️ Already logged a run today! Rest up and come back tomorrow. 🐾';
+    document.getElementById('encouragement').style.color = 'var(--accent)';
+    return;
+  }
+  runCount++;
+  lastRunDate = today;
+  localStorage.setItem('kidRunCount', runCount);
+  localStorage.setItem('kidLastRunDate', lastRunDate);
+  updateProgress();
+}
+
+function resetRuns() {
+  if (confirm('Reset all your runs? You\'ll lose your streak!')) {
+    runCount = 0;
+    lastRunDate = '';
+    localStorage.removeItem('kidRunCount');
+    localStorage.removeItem('kidLastRunDate');
+    updateProgress();
+  }
+}
+
+function updateProgress() {
+  const pct = Math.min(runCount / 10 * 100, 100);
+  document.getElementById('runCount').textContent = runCount;
+  document.getElementById('progressBar').style.width = pct + '%';
+  const msg = document.getElementById('encouragement');
+  const badge = document.getElementById('streakBadge');
+  if (runCount === 0) {
+    msg.innerHTML = 'Click <strong>+1 Run</strong> to start your journey! 🚀';
+    msg.style.color = 'var(--accent)';
+    badge.style.display = 'none';
+  } else if (runCount < 3) {
+    msg.innerHTML = 'Great start! Every run counts. Keep going! ⭐';
+    msg.style.color = 'var(--accent)';
+  } else if (runCount < 7) {
+    msg.innerHTML = 'You\'re building a habit! That\'s awesome! 🔥';
+    msg.style.color = 'var(--pink)';
+  } else if (runCount < 10) {
+    msg.innerHTML = 'Almost at 10! You\'re crushing it! 💪';
+    msg.style.color = 'var(--blue)';
+  } else {
+    msg.innerHTML = '🏆 10 RUNS! You\'re officially a runner! AMAZING work! 🎉🎉🎉';
+    msg.style.color = 'var(--green)';
+    badge.style.display = 'inline-block';
+    badge.className = 'streak-badge';
+    badge.textContent = '🏆 10-Run Champion!';
+  }
+}
+
+// Gear Checklist
+function toggleCheck(el) {
+  el.classList.toggle('done');
+}
+
+// Stretch Timer
+let timerInterval = null;
+let timerSeconds = 30;
+
+function updateTimerDisplay() {
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+  document.getElementById('timerDisplay').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+  if (timerSeconds === 0 && timerInterval) {
+    stopTimer();
+    document.getElementById('timerLabel').textContent = '⏰ Time\'s up! Great stretch!';
+  }
+}
+
+function startTimer(secs) {
+  stopTimer();
+  timerSeconds = secs;
+  updateTimerDisplay();
+  document.getElementById('timerLabel').textContent = 'Stretching... 🧘';
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  document.getElementById('timerLabel').textContent = 'Paused';
+}
+
+function resetTimer() {
+  stopTimer();
+  timerSeconds = 30;
+  updateTimerDisplay();
+  document.getElementById('timerLabel').textContent = 'Ready?';
+}
+
+// Pace Calculator
+function calcPace() {
+  const mins = parseFloat(document.getElementById('calcMins').value) || 10;
+  const dist = parseFloat(document.getElementById('calcDist').value) || 1.5;
+  if (mins <= 0 || dist <= 0) return;
+  const paceMinPerKm = mins / dist;
+  const paceMins = Math.floor(paceMinPerKm);
+  const paceSecs = Math.round((paceMinPerKm - paceMins) * 60);
+  const totalSecs = Math.round(mins * 60 / dist);
+  const speed = (dist / (mins / 60)).toFixed(1);
+  document.getElementById('calcResult').textContent =
+    'Your pace: ' + paceMins + ':' + (paceSecs < 10 ? '0' : '') + paceSecs + ' per km (that\'s ' + speed + ' km/h!)';
+}
+calcPace();
+
+// Quiz
+function checkQuiz(el, answer, qId) {
+  const container = document.getElementById(qId);
+  const allOpts = container.querySelectorAll('.quiz-opt');
+  const already = container.querySelector('.correct');
+  if (already) return; // don't let them re-answer
+  allOpts.forEach(o => o.style.pointerEvents = 'none');
+  el.classList.add(answer === 'correct' ? 'correct' : 'wrong');
+  const fb = document.createElement('div');
+  fb.className = 'quiz-feedback ' + (answer === 'correct' ? 'good' : 'bad');
+  fb.textContent = answer === 'correct' ? '✅ Correct! Nice one!' : '❌ Not quite — try to remember the right answer for next time!';
+  container.appendChild(fb);
+}
+</script>
+</body>
+</html>
