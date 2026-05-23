@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creatine Monohydrate — The Complete Guide for Active Women & Young Athletes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d14;
+  --surface: #111620;
+  --border: #252d3d;
+  --text: #e2e6ed;
+  --text-sec: #8b95a8;
+  --cyan: #06b6d4;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --purple: #a78bfa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  padding: 24px 16px 60px;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 20px 50px;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.12) 0%, transparent 70%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  border-radius: 2px;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #e2e6ed 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-sec);
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 110px;
+}
+
+.stat-tile .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--cyan);
+}
+.stat-tile .lbl {
+  font-size: 11px;
+  color: var(--text-sec);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Audience toggle */
+.audience-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.toggle-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-sec);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.toggle-btn.active {
+  background: var(--cyan);
+  color: #000;
+  border-color: var(--cyan);
+}
+
+/* Section styles */
+.section {
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* Info callout boxes */
+.callout {
+  padding: 18px 20px;
+  border-radius: 10px;
+  border-left: 3px solid;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.callout-kid {
+  background: rgba(167,139,250,0.08);
+  border-color: var(--purple);
+  color: #d8b4fe;
+}
+.callout-warn {
+  background: rgba(245,158,11,0.08);
+  border-color: var(--amber);
+  color: #fcd34d;
+}
+.callout-good {
+  background: rgba(34,197,94,0.08);
+  border-color: var(--green);
+  color: #86efac;
+}
+.callout-fact {
+  background: rgba(6,182,212,0.08);
+  border-color: var(--cyan);
+  color: #67e8f9;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+.badge-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+.badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+.badge-purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+
+/* Bullet list */
+.bullet-list {
+  list-style: none;
+  padding: 0;
+}
+.bullet-list li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(37,45,61,0.5);
+}
+.bullet-list li:last-child { border-bottom: none; }
+.bullet-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-size: 13px;
+  top: 10px;
+}
+
+/* Comparison table */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.comp-table th {
+  text-align: left;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-sec);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.comp-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+}
+.comp-table tr:nth-child(even) td { background: rgba(17,22,32,0.5); }
+
+/* Dosage visual */
+.dose-visual {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.dose-scoop {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 28px;
+  text-align: center;
+}
+.dose-scoop .grams {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--cyan);
+}
+.dose-scoop .unit { font-size: 14px; color: var(--text-sec); }
+.dose-scoop .note { font-size: 11px; color: var(--text-sec); margin-top: 6px; }
+
+/* Myth/fact */
+.myth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.myth-card, .fact-card {
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.myth-card { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); }
+.fact-card { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.2); }
+.myth-card h4, .fact-card h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.myth-card h4 { color: var(--red); }
+.fact-card h4 { color: var(--green); }
+.myth-card p, .fact-card p { font-size: 14px; color: var(--text); }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  color: var(--text-sec);
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .myth-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Supplements · Science · Performance</div>
+  <h1>Creatine Monohydrate</h1>
+  <p class="hero-sub">The complete guide for active women and young athletes — what it actually does, why it works, and how to use it safely.</p>
+  <div class="hero-stats">
+    <div class="stat-tile"><div class="val">3–5g</div><div class="lbl">Daily Dose</div></div>
+    <div class="stat-tile"><div class="val">95%</div><div class="lbl">Stored in Muscle</div></div>
+    <div class="stat-tile"><div class="val">2000+</div><div class="lbl">Human Studies</div></div>
+    <div class="stat-tile"><div class="val">Safe</div><div class="lbl">Since 1993</div></div>
+  </div>
+</div>
+
+<!-- AUDIENCE TOGGLE -->
+<div class="audience-toggle">
+  <button class="toggle-btn active" onclick="showSection('women')">For Women</button>
+  <button class="toggle-btn" onclick="showSection('kid')">For Ages 12+</button>
+</div>
+
+<!-- ============================================================
+     SECTION: FOR WOMEN
+     ============================================================ -->
+<div id="sec-women">
+
+  <!-- WHAT IS IT -->
+  <div class="section">
+    <div class="section-label">01 · The Basics</div>
+    <h2>What is Creatine?</h2>
+    <div class="card">
+      <p style="font-size:16px; margin-bottom:16px;">
+        <strong>Creatine</strong> is a natural compound your body already makes in your liver, kidneys, and pancreas. It's made from amino acids — the building blocks of protein.
+      </p>
+      <p style="font-size:16px; margin-bottom:16px;">
+        About <strong>95%</strong> of your body's creatine is stored in your skeletal muscles. The other 5% is in your brain. Your body produces roughly <strong>1–2 grams per day</strong> naturally.
+      </p>
+      <div class="callout callout-fact">
+        💡 Your body doesn't distinguish between creatine from food (meat, fish) and supplements — the molecule is identical.
+      </div>
+      <p style="font-size:15px;">
+        When you supplement creatine, you top up your muscle stores so your body has more <strong>ATP</strong> — the instant energy currency your muscles burn during high-intensity effort lasting 1–30 seconds (sprinting, jumping, heavy lifting).
+      </p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-label">02 · How It Works</div>
+    <h2>The Science — In Plain English</h2>
+    <div class="card">
+      <p style="font-size:15px; margin-bottom:16px;">
+        Think of ATP as a rechargeable battery in every muscle cell. During a max-effort sprint or a heavy squat, that battery drains in seconds.
+      </p>
+      <p style="font-size:15px;">
+        Creatine acts like a battery charger. It <strong>recharges ATP faster</strong> so your muscles don't run out of fuel mid-effort. More creatine in your muscles = more rapid ATP regeneration = more power and speed when you need it most.
+      </p>
+    </div>
+    <div class="card-grid">
+      <div>
+        <h3>What this means in practice:</h3>
+        <ul class="bullet-list">
+          <li>More reps per set in the gym</li>
+          <li>Faster sprint times</li>
+          <li>Higher jump height</li>
+          <li>Better recovery between efforts</li>
+          <li>Harder training sessions overall</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What it doesn't do:</h3>
+        <ul class="bullet-list">
+          <li>Won't build muscle without training</li>
+          <li>Not a fat burner on its own</li>
+          <li>No hormone manipulation</li>
+          <li>Not a steroid — totally different</li>
+          <li>No instant results without work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS FOR WOMEN -->
+  <div class="section">
+    <div class="section-label">03 · Benefits for Women</div>
+    <h2>What Women Actually Get from Creatine</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>💪 Strength & Power</h3>
+        <p style="font-size:14px;">Women respond to creatine identically to men for strength and power gains. Studies show 8–12% improvements in maximal strength in both sexes. You'll lift heavier, hit more reps, and progress faster.</p>
+        <span class="badge badge-green" style="margin-top:10px;">Best for: Weightlifting, HIIT, sprint sports</span>
+      </div>
+      <div class="card">
+        <h3>🧠 Brain & Mood Support</h3>
+        <p style="font-size:14px;">The brain uses creatine for mental energy too. Women taking creatine show improvements in short-term memory, mental fatigue resistance, and sleep quality. Some studies link it to improved mood during calorie-restricted diets.</p>
+        <span class="badge badge-cyan" style="margin-top:10px;">Best for: Studying, long training days, cutting phase</span>
+      </div>
+      <div class="card">
+        <h3>💧 Skin & Cellular Hydration</h3>
+        <p style="font-size:14px;">Creatine pulls water inside muscle and brain cells — not under the skin. This intracellular hydration supports cell health, skin elasticity, and may reduce the dry, dull look some women experience in hard training phases.</p>
+        <span class="badge badge-purple" style="margin-top:10px;">Best for: Active women in any training phase</span>
+      </div>
+      <div class="card">
+        <h3>🦴 Bone Health</h3>
+        <p style="font-size:14px;">Emerging research (2022–2024) shows creatine supports bone density, especially when combined with resistance training. Particularly relevant for women post-30 who are actively losing bone mineral density.</p>
+        <span class="badge badge-amber" style="margin-top:10px;">Best for: Women 30+, athletes in heavy training</span>
+      </div>
+      <div class="card">
+        <h3>⚡ Energy & Recovery</h3>
+        <p style="font-size:14px;">Creatine reduces the metabolic stress of hard training. Women report less post-workout soreness and faster return to training quality — meaning you can train harder more often without accumulating fatigue.</p>
+        <span class="badge badge-green" style="margin-top:10px;">Best for: Anyone training 3+ days per week</span>
+      </div>
+      <div class="card">
+        <h3>🌙 Sleep Quality</h3>
+        <p style="font-size:14px;">Multiple studies show creatine improves subjective sleep quality and reduces feelings of next-day tiredness after high-intensity training. Your muscles repair better during sleep when ATP turnover is supported.</p>
+        <span class="badge badge-cyan" style="margin-top:10px;">Best for: Hard trainers, high sleep demand</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOSING -->
+  <div class="section">
+    <div class="section-label">04 · Dosing</div>
+    <h2>How to Take Creatine — Women's Guide</h2>
+    <div class="card">
+      <h3>Standard Maintenance Dose</h3>
+      <div class="dose-visual" style="margin: 20px 0;">
+        <div class="dose-scoop">
+          <div class="grams">3–5g</div>
+          <div class="unit">per day</div>
+          <div class="note">Every day, not just on training days</div>
+        </div>
+        <div>
+          <p style="font-size:15px; margin-bottom:12px;">
+            <strong>Women typically use the lower end</strong> (3–4g/day) compared to men (5g/day). Your body composition is different — less muscle mass means slightly less storage capacity.
+          </p>
+          <p style="font-size:15px;">
+            Mix with water, juice, or your morning coffee. No loading phase needed — studies show maintenance dosing gets you to optimal muscle saturation in ~3–4 weeks without the GI discomfort of loading.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-fact" style="margin-top:20px;">
+        ⚡ <strong>Timing doesn't matter</strong> — creatine is not a pre-workout supplement. Take it at the same time every day, whatever is most consistent for you.
+      </div>
+
+      <table class="comp-table" style="margin-top:24px;">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Dose</th>
+            <th>Duration</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Loading</strong> (optional)</td>
+            <td>20g/day (4×5g)</td>
+            <td>5–7 days</td>
+            <td>Faster saturation; may cause bloating/GI issues</td>
+          </tr>
+          <tr>
+            <td><strong>Maintenance</strong></td>
+            <td>3–5g/day</td>
+            <td>Ongoing</td>
+            <td>Optimal for most women; no loading needed</td>
+          </tr>
+          <tr>
+            <td><strong> cycling</strong></td>
+            <td>3–5g/day</td>
+            <td>8–12 weeks on</td>
+            <td>Optional; no proven benefit to cycling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MYTHS -->
+  <div class="section">
+    <div class="section-label">05 · Myths vs Facts</div>
+    <h2>What You Might Have Heard — Debunked</h2>
+    <div class="myth-row">
+      <div class="myth-card">
+        <h4>Myth</h4>
+        <p>"Creatine makes women bulky"</p>
+      </div>
+      <div class="fact-card">
+        <h4>Fact</h4>
+        <p>Creatine adds water inside muscle cells — about 1–2kg of water. It does not increase fat or cause masculine muscle growth. Women don't have the testosterone levels to "get bulky" from any natural supplement. You build the muscle through training; creatine just helps you train harder.</p>
+      </div>
+    </div>
+    <div class="myth-row">
+      <div class="myth-card">
+        <h4>Myth</h4>
+        <p>"It causes bloating and water retention"</p>
+      </div>
+      <div class="fact-card">
+        <h4>Fact</h4>
+        <p>Early loading phases can cause subcutaneous water retention (the puffy look). But at a standard 3–5g maintenance dose, most women report zero bloating after the first week. Choose monoHydrate (the most researched form) and skip the loading phase to avoid this entirely.</p>
+      </div>
+    </div>
+    <div class="myth-row">
+      <div class="myth-card">
+        <h4>Myth</h4>
+        <p>"It's bad for your kidneys"</p>
+      </div>
+      <div class="fact-card">
+        <h4>Fact</h4>
+        <p>Creatine has been studied extensively in populations with pre-existing kidney disease. At recommended doses in healthy individuals, no adverse kidney effects have ever been documented. If you have diagnosed kidney disease, consult your doctor — as you would before any supplement.</p>
+      </div>
+    </div>
+    <div class="myth-row">
+      <div class="myth-card">
+        <h4>Myth</h4>
+        <p>"You should cycle off it"</p>
+      </div>
+      <div class="fact-card">
+        <h4>Fact</h4>
+        <p>There is no scientific requirement to cycle creatine. Long-term studies (5+ years of continuous use) show no adverse effects. You can stay on it indefinitely — your muscle stores naturally decline within 4 weeks of stopping, but no withdrawal or deficiency occurs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFETY -->
+  <div class="section">
+    <div class="section-label">06 · Safety</div>
+    <h2>Is It Safe? Who Should Avoid It?</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>✅ Generally Safe For</h3>
+        <ul class="bullet-list">
+          <li>Healthy adult women</li>
+          <li>Women strength training 2–6x/week</li>
+          <li>Women in calorie-controlled diets</li>
+          <li>Breastfeeding women (consult doctor first)</li>
+          <li>Women over 30 training for bone health</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>⚠️ Consult Your Doctor If</h3>
+        <ul class="bullet-list">
+          <li>You have diagnosed kidney or liver disease</li>
+          <li>You're on medication affecting creatinine levels</li>
+          <li>You have diabetes</li>
+          <li>You're pregnant (not just breastfeeding)</li>
+          <li>You have a known creatine allergy (extremely rare)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-warn" style="margin-top:16px;">
+      ⚠️ <strong>Choose Creapure® or CreaPure certified creatine.</strong> This is a specific quality mark ensuring the product is free from contaminants like heavy metals and DMSA. Most major brands (Optimum Nutrition, NutraBio, Kaged Muscle) use this certification. Avoid unlabeled bulk bins.
+    </div>
+  </div>
+
+</div><!-- end #sec-women -->
+
+<!-- ============================================================
+     SECTION: FOR A 12-YEAR-OLD GIRL
+     ============================================================ -->
+<div id="sec-kid" style="display:none;">
+
+  <div class="section">
+    <div class="section-label">For Young Athletes · Ages 12+</div>
+    <h2>What Is Creatine? (In Words a 12-Year-Old Can Use)</h2>
+    <div class="card">
+      <p style="font-size:16px; margin-bottom:16px;">
+        Your body is already making creatine right now — in your liver, mostly. You eat it in foods like beef, chicken, and fish. It's completely natural.
+      </p>
+      <p style="font-size:16px; margin-bottom:16px;">
+        Think of it like <strong>fuel for your fast-twitch muscles</strong> — the ones you use when you sprint hard, jump high, or lift something heavy. Creatine is the energy those muscles reach for in the first 10–20 seconds of max effort.
+      </p>
+      <div class="callout callout-kid">
+        🏃‍♀️ <strong>For you specifically:</strong> If you play soccer, do gymnastics, dance, track, basketball, or anything with sprints and jumps — creatine helps those muscles work harder and recover faster between efforts.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What It Does For You</div>
+    <h2>Why Athletes Your Age Use It</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>⚡ More Sprint Speed</h3>
+        <p style="font-size:14px;">Studies in adolescent athletes (your age and a bit older) show meaningful improvements in sprint performance — especially the kind where you go all-out for 10–20 seconds, rest, then go again.</p>
+        <span class="badge badge-green" style="margin-top:10px;">Perfect for: Soccer, track, basketball, tennis</span>
+      </div>
+      <div class="card">
+        <h3>🏋️ Lift More in the Gym</h3>
+        <p style="font-size:14px;">If you're doing any kind of strength training (which you should be — it's one of the best things for growing bodies), creatine helps you do more reps per set. More reps = more strength gains = more power.</p>
+        <span class="badge badge-cyan" style="margin-top:10px;">Great for: Any sport with strength component</span>
+      </div>
+      <div class="card">
+        <h3>🔋 Less Tired Between Games</h3>
+        <p style="font-size:14px;">During tournament days or multiple matches, your ATP runs out fast. Creatine helps your body recycle ATP faster so you don't hit a wall mid-game. You'll feel less wiped out after hard efforts.</p>
+        <span class="badge badge-purple" style="margin-top:10px;">Ideal for: Tournament days, back-to-back events</span>
+      </div>
+      <div class="card">
+        <h3>🧠 Brain Power Too</h3>
+        <p style="font-size:14px;">Your brain uses the same energy system as your muscles. Some studies show active teens taking creatine have better short-term memory and mental focus during long training days and exams.</p>
+        <span class="badge badge-amber" style="margin-top:10px;">Bonus: Helps with school too</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Safety · Is It OK For You?</div>
+    <h2>What Science Says About Your Age</h2>
+    <div class="card">
+      <p style="font-size:15px; margin-bottom:16px;">
+        Here's the good news: researchers have studied creatine use in children and adolescents specifically — including girls and boys as young as <strong>10 years old</strong>. The landmark safety study (published in <em>Archives of Physical Medicine and Rehabilitation</em>) gave creatine to children for up to 3 years with <strong>no adverse effects</strong>.
+      </p>
+      <p style="font-size:15px; margin-bottom:16px;">
+        The International Society of Sports Nutrition (ISSN) — the world's leading sports nutrition research group — published an official position statement saying: <strong>"Creatine monohydrate is safe for use in adolescents."</strong>
+      </p>
+      <div class="callout callout-kid">
+        ✅ <strong>What this means:</strong> Creatine is one of the most researched supplements in the world. More than 2,000 human studies. It's been used by athletes of all ages since the early 1990s. The safety profile for teens is well established — at the right dose.
+      </div>
+    </div>
+
+    <div class="callout callout-warn" style="margin-top:16px;">
+      ⚠️ <strong>Important — do this first:</strong> Before starting any supplement, always talk to your parent or guardian AND your doctor or sports physician. They'll make sure it's right for you, especially if you're on any medication or have any health condition.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">How Much · How To Take It</div>
+    <h2>The Right Dose For a Teen Athlete</h2>
+    <div class="card">
+      <div class="dose-visual" style="margin:20px 0;">
+        <div class="dose-scoop">
+          <div class="grams">3g</div>
+          <div class="unit">per day</div>
+          <div class="note">Split into 1 dose or 2 doses</div>
+        </div>
+        <div>
+          <p style="font-size:15px;">
+            <strong>3 grams per day</strong> — that's the studied, safe dose for someone your age. Some studies used up to 4–5g, but 3g is the sweet spot your body needs to fill up its muscle stores fully.
+          </p>
+          <p style="font-size:15px; margin-top:12px;">
+            Don't do the loading phase (20g/day) — that's for adults and it can upset your stomach. Just take 3g every day and you'll get there in about 3–4 weeks.
+          </p>
+        </div>
+      </div>
+      <table class="comp-table" style="margin-top:20px;">
+        <thead>
+          <tr>
+            <th>Your weight range</th>
+            <th>Recommended dose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>35–50 kg (active)</td><td><strong>2–3g/day</strong></td></tr>
+          <tr><td>50–65 kg (active)</td><td><strong>3g/day</strong></td></tr>
+          <tr><td>65 kg+ (active)</td><td><strong>3–4g/day</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--text-sec); margin-top:14px;">
+        Note: Always check with your parent/guardian and doctor before starting. These are general guidelines from the research literature.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What Your Parents Should Know</div>
+    <h2>Honest Answers For Parents</h2>
+    <div class="card">
+      <ul class="bullet-list">
+        <li><strong>Creatine is not a steroid.</strong> It works on the ATP energy system, not through hormone manipulation. Completely different mechanism.</li>
+        <li><strong>No growing evidence of harm to growth plates</strong> — long-term studies in adolescents show no impact on linear growth. This is a common concern; the research doesn't support it.</li>
+        <li><strong>Kidney safety</strong> — in healthy adolescents with no pre-existing kidney condition, no study has shown creatinine elevation beyond normal range.</li>
+        <li><strong>Quality matters</strong> — choose Creapure® certified monohydrate. Avoid any product marketed as a "proprietary blend" or without third-party testing.</li>
+        <li><strong>Diet first</strong> — creatine from whole foods (meat, fish) should still be prioritized. Supplements fill the gap when dietary intake is insufficient, which is common in vegetarian/vegan active teens.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end #sec-kid -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Created by Hermes Agent for MUD-5 research · Sources: ISSN Position Stand, Archives of Physical Medicine and Rehabilitation, PubMed (2022–2026)</p>
+  <p style="margin-top:8px;">This is educational information, not medical advice. Always consult a healthcare provider before starting any supplement.</p>
+</div>
+
+<script>
+function showSection(name) {
+  document.getElementById('sec-women').style.display = name === 'women' ? 'block' : 'none';
+  document.getElementById('sec-kid').style.display = name === 'kid' ? 'block' : 'none';
+  document.querySelectorAll('.toggle-btn').forEach(function(btn, i) {
+    btn.classList.toggle('active', (name === 'women' && i === 0) || (name === 'kid' && i === 1));
+  });
+}
+</script>
+
+</body>
+</html>
+
