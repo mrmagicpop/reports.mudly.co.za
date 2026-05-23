@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indonesia Backpacking Guide — 3 Month Adventure</title>
+<style>
+  :root {
+    --bg: #0a0f18;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #d1d5db;
+    --muted: #6b7280;
+    --amber: #f59e0b;
+    --emerald: #10b981;
+    --rose: #f43f5e;
+    --sky: #0ea5e9;
+    --violet: #8b5cf6;
+    --orange: #f97316;
+    --teal: #14b8a6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.75;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 60px auto 0 auto; }
+
+  h1 {
+    font-size: 2.6rem;
+    background: linear-gradient(135deg, var(--rose), var(--amber), var(--emerald));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-size: 1.5rem;
+    color: var(--amber);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  h3 { font-size: 1.15rem; color: var(--text); margin: 24px 0 10px; }
+  p { margin-bottom: 16px; color: var(--muted); line-height: 1.8; }
+  .subtitle { font-size: 1.1rem; color: var(--muted); margin-bottom: 32px; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(244,63,94,0.06));
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .highlight-box strong { color: var(--amber); }
+
+  /* Route Timeline */
+  .timeline { position: relative; padding-left: 40px; margin: 24px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-stop {
+    position: relative;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .timeline-stop::before {
+    content: '';
+    position: absolute;
+    left: -31px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--amber);
+    background: var(--bg);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .timeline-stop:hover::before { background: var(--amber); transform: scale(1.3); }
+  .timeline-stop.active::before { background: var(--emerald); border-color: var(--emerald); }
+  .stop-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .stop-days {
+    background: var(--amber);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+  }
+  .stop-name { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+  .stop-detail { display: none; color: var(--muted); margin-top: 8px; font-size: 0.95rem; }
+  .timeline-stop.active .stop-detail { display: block; }
+
+  /* Budget Tracker */
+  .budget-bar {
+    background: var(--border);
+    border-radius: 12px;
+    height: 20px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .budget-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--emerald), var(--teal));
+    border-radius: 12px;
+    transition: width 0.4s;
+    width: 0%;
+  }
+  .budget-fill.warning { background: linear-gradient(90deg, var(--amber), var(--orange)); }
+  .budget-fill.danger { background: linear-gradient(90deg, var(--orange), var(--rose)); }
+  .budget-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; }
+  .budget-label { color: var(--muted); font-size: 0.9rem; }
+  .budget-value { font-weight: 700; }
+
+  /* Packing Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 7px 0;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .checklist li .box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.7rem;
+  }
+  .checklist li.done { color: var(--emerald); }
+  .checklist li.done .box { border-color: var(--emerald); background: var(--emerald); color: #000; }
+  .checklist li.done .box::after { content: '✓'; }
+
+  /* Region Tabs */
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin: 16px 0; }
+  .tab {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .tab:hover { border-color: var(--amber); color: var(--amber); }
+  .tab.active { background: rgba(245,158,11,0.1); border-color: var(--amber); color: var(--amber); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Facts */
+  .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  @media (max-width: 500px) { .fact-grid { grid-template-columns: 1fr; } }
+  .fact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .fact-number { font-size: 2rem; font-weight: 800; color: var(--amber); }
+  .fact-label { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+
+  /* Cost estimator */
+  .slider-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+  .slider-row label { color: var(--muted); min-width: 100px; font-size: 0.9rem; }
+  input[type="range"] { flex: 1; accent-color: var(--amber); }
+  .slider-val { font-weight: 700; min-width: 60px; text-align: right; }
+
+  .btn {
+    background: var(--amber);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .btn:hover { transform: scale(1.03); }
+  .btn:active { transform: scale(0.97); }
+  .btn.reset { background: var(--muted); color: #fff; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; color: var(--muted); font-size: 0.9rem; }
+  th { text-align: left; color: var(--text); padding: 8px; border-bottom: 1px solid var(--border); }
+  td { padding: 8px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .container { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+<a href="/" style="position:fixed;top:14px;left:20px;z-index:100;font-size:12px;font-weight:600;color:#8b95a8;text-decoration:none;letter-spacing:0.5px;opacity:0.7;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Curated Intelligence</a>>
+<main class="container">
+
+<h1>🇮🇩 Indonesia: 3-Month Backpacking Adventure</h1>
+<p class="subtitle">A complete guide to exploring the world's largest archipelago — on a backpacker's budget. Hostels, street food, volcanoes, temples, and the best walking tours across Java, Bali, Lombok, Flores, and beyond.</p>
+
+<!-- KEY FACTS -->
+<div class="fact-grid">
+  <div class="fact-card">
+    <div class="fact-number">17,508</div>
+    <div class="fact-label">Islands in Indonesia</div>
+  </div>
+  <div class="fact-card">
+    <div class="fact-number">90</div>
+    <div class="fact-label">Days — perfect for a deep dive</div>
+  </div>
+  <div class="fact-card">
+    <div class="fact-number">$25–40</div>
+    <div class="fact-label">Daily backpacker budget (USD)</div>
+  </div>
+  <div class="fact-card">
+    <div class="fact-number">130+</div>
+    <div class="fact-label">Active volcanoes to hike</div>
+  </div>
+</div>
+
+<!-- BUDGET TRACKER -->
+<div class="card">
+  <h3>💰 Budget Estimator & Tracker</h3>
+  <p style="color:var(--muted);margin-bottom:8px;">Adjust the sliders to match your style, then track spending.</p>
+  <div class="slider-row">
+    <label>Accommodation</label>
+    <input type="range" id="accomSlider" min="5" max="50" value="12" oninput="updateBudget()">
+    <span class="slider-val" id="accomVal">$12</span>
+  </div>
+  <div class="slider-row">
+    <label>Food & drink</label>
+    <input type="range" id="foodSlider" min="5" max="40" value="10" oninput="updateBudget()">
+    <span class="slider-val" id="foodVal">$10</span>
+  </div>
+  <div class="slider-row">
+    <label>Transport</label>
+    <input type="range" id="transpSlider" min="2" max="30" value="5" oninput="updateBudget()">
+    <span class="slider-val" id="transpVal">$5</span>
+  </div>
+  <div class="slider-row">
+    <label>Activities</label>
+    <input type="range" id="actSlider" min="0" max="40" value="8" oninput="updateBudget()">
+    <span class="slider-val" id="actVal">$8</span>
+  </div>
+  <div class="budget-row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+    <span class="budget-label">Daily total:</span>
+    <span class="budget-value" id="dailyTotal" style="font-size:1.3rem;">$35</span>
+  </div>
+  <div class="budget-row">
+    <span class="budget-label">3-month estimated total:</span>
+    <span class="budget-value" id="tripTotal" style="font-size:1.3rem;color:var(--amber);">$3,150</span>
+  </div>
+  <p style="color:var(--muted);font-size:0.85rem;margin-top:8px;">Add $300–600 for flights between islands and $500–1000 for your international flight. Budget range: <strong>$3,500–5,000 total</strong>.</p>
+
+  <div style="margin-top:16px;">
+    <p style="color:var(--muted);margin-bottom:6px;">Track your spending:</p>
+    <div class="budget-row">
+      <span class="budget-label">Spent so far:</span>
+      <span><input type="number" id="spentInput" value="0" min="0" step="50" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;width:100px;text-align:right;" oninput="updateBudget()"> USD</span>
+    </div>
+    <div class="budget-bar">
+      <div class="budget-fill" id="budgetFill"></div>
+    </div>
+    <p id="budgetMsg" style="font-size:0.85rem;margin-top:6px;"></p>
+  </div>
+</div>
+
+<!-- 90-DAY ROUTE -->
+<h2>🗺️ The 90-Day Route</h2>
+<p>Click each stop to see details. This route goes west to east — Jakarta to Flores — then optionally loops back. Adjust based on what excites you most.</p>
+
+<div class="timeline" id="timeline">
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Jakarta</span><span class="stop-days">3 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> PackerBox Hostel (Menteng) or Six Degrees (Cikini) — $8–12/night with breakfast.</p>
+      <p><strong>Do:</strong> Old Town (Kota Tua), National Monument (Monas), street food tour in Glodok (Chinatown). Great walking tour: join a free walking tour from the hostel covering colonial history and the old harbour.</p>
+      <p><strong>Eat:</strong> Nasi goreng from street stalls ($1.50), soto betawi (coconut beef soup), martabak manis after dark.</p>
+      <p><strong>Move on:</strong> Train to Yogyakarta (8 hrs, $15–25) — book executive class for AC and legroom.</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Yogyakarta</span><span class="stop-days">5–6 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Otu Hostel or Laura's Backpacker — $6–10/night. Social, great for meeting other backpackers.</p>
+      <p><strong>Do:</strong> Borobudur sunrise (UNESCO, world's largest Buddhist temple — leave at 3:30am, $25 entry), Prambanan Hindu temple complex (stunning, go for sunset), Water Palace (Taman Sari), Malioboro Street night market. Walking tour: the back alleys of the Kraton (Sultan's Palace) with a local guide ($5 tip).</p>
+      <p><strong>Detour:</strong> Day trip to Jomblang Cave ($35 including transport) — rappel into a vertical cave with heavenly light beams.</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Mount Bromo</span><span class="stop-days">2–3 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Cemara Indah Hotel or guesthouses in Cemoro Lawang ($10–20/night).</p>
+      <p><strong>Do:</strong> Sunrise jeep tour to Penanjakan viewpoint (leave 3:30am — otherworldly), then walk across the Sea of Sand to the crater rim. You can walk without a jeep if you're fit — 5 km across volcanic sand. Include the savanna and Whispering Sands.</p>
+      <p><strong>Move on:</strong> Shared minivan to Ijen (via Probolinggo, 5–6 hrs).</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Ijen Crater</span><span class="stop-days">2 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Homestays in Sempol or Licin ($8–12/night).</p>
+      <p><strong>Do:</strong> Midnight hike to see the blue fire — burning sulphur with electric-blue flames (one of only two places on Earth). 3 km steep hike, gas mask provided. Then watch sunrise over the turquoise crater lake. Walking tour: continue down into the sulphur mine to meet the miners (bring snacks to share — they'll appreciate it).</p>
+      <p><strong>Move on:</strong> Ferry from Banyuwangi to Gilimanuk, Bali (1 hr, $1). Then bus to Ubud (4 hrs).</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Ubud, Bali</span><span class="stop-days">6–7 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> In Da Lodge or Puri Garden Hostel — $10–15/night, pool, social vibe.</p>
+      <p><strong>Do:</strong> Campuhan Ridge Walk (free, stunning at sunrise), Tegalalang rice terraces (walk the narrow paths between paddies), Monkey Forest (keep your belongings close!), Tirta Empul water temple (you can join the purification ritual). Walking tour: the Campuhan Ridge at dawn, then follow the path down through rice fields to Karsa Kafe for breakfast.</p>
+      <p><strong>Learn:</strong> Silver-making class in Celuk Village ($20) or a Balinese cooking class ($15–25 including market tour).</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Gili Islands</span><span class="stop-days">5–6 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Gili Trawangan for social/party scene, Gili Air for chilled vibe. Hostels from $8/night.</p>
+      <p><strong>Do:</strong> No cars on any Gili island — walk, cycle, or take a pony cart. Snorkel with sea turtles (rent gear for $3, swim from the beach). Sunset swing on Gili T's west side. Walking tour: circumnavigate Gili Air on foot (about 90 minutes at a stroll) — you'll see the volcano Mount Rinjani across the water.</p>
+      <p><strong>Move on:</strong> Boat back to Lombok, then bus to Kuta Lombok (2 hrs).</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Kuta Lombok</span><span class="stop-days">4–5 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Kuta Cabana or Pipes Hostel — $7–12/night.</p>
+      <p><strong>Do:</strong> Scooter the south coast beaches — Tanjung Aan (twin bays, turquoise water), Mawun Beach (crescent-shaped, empty), Selong Belanak (learn to surf for $10/hour). Walking tour: the coastal headland trail from Kuta to Tanjung Aan (about 2 hrs along cliffs).</p>
+      <p><strong>Optional:</strong> 3-day Rinjani trek. Very tough (3,726m volcano) but epic. Book in Senaru ($150–200 all-inclusive). Only do this if you're fit and acclimatised.</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Labuan Bajo & Komodo</span><span class="stop-days">5–7 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Stay:</strong> Ciao Hostel or Dragon Dive Hostel — $8–15/night.</p>
+      <p><strong>Do:</strong> 2–3 day Komodo boat trip (from $150 — negotiate at the harbour for better rates). Padar Island (the famous Instagram viewpoint — steep 30-minute climb), Pink Beach (yes, the sand is actually pink), Komodo dragons on Rinca or Komodo Island, Manta Point snorkelling. Walking tour: the Padar summit trail at sunrise — three curved bays below, one of the best views in Asia.</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Flores Overland</span><span class="stop-days">7–10 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Route:</strong> Labuan Bajo → Ruteng → Bajawa → Moni (Kelimutu) → Ende → Maumere. Local buses or shared cars the whole way.</p>
+      <p><strong>Highlights:</strong> Spiderweb rice fields near Ruteng (Lingko), traditional villages around Bajawa (Bena, Luba — stone megaliths), Kelimutu volcano with three different-coloured crater lakes at sunrise (red, blue, green — they change over time). Walking tour: hike from Moni village up to Kelimutu for sunrise (1.5 hrs, start at 4am).</p>
+      <p><strong>Stay:</strong> Simple homestays ($5–10/night). This is rural Indonesia at its most authentic.</p>
+    </div>
+  </div>
+
+  <div class="timeline-stop" onclick="toggleStop(this)">
+    <div class="stop-header"><span class="stop-name">Return Loop (flexible)</span><span class="stop-days">14–20 days</span></div>
+    <div class="stop-detail">
+      <p><strong>Option A — Nusa Islands:</strong> Nusa Penida (Kelingking Beach, Broken Beach, snorkel with manta rays), Nusa Lembongan (chilled surfer vibe), Nusa Ceningan (walk between islands on the yellow bridge). 5–7 days.</p>
+      <p><strong>Option B — North Bali:</strong> Munduk waterfalls trek, Lovina dolphin watching at dawn, Banjar hot springs. 3–4 days.</p>
+      <p><strong>Option C — Sumatra extension:</strong> Fly Jakarta → Medan. Bukit Lawang orangutan trek (3 days, $100–150), Lake Toba (world's largest volcanic lake), Berastagi volcanoes. 10–14 days.</p>
+      <p><strong>Option D — Sulawesi:</strong> Fly to Makassar. Tana Toraja (funeral ceremonies, boat-shaped houses, stunning highlands). 5–7 days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- REGION TABS -->
+<h2>🌏 Region Deep Dives</h2>
+<p>Select a region for specific tips, foods, and walking tours.</p>
+
+<div class="tabs">
+  <span class="tab active" onclick="switchTab('java')">Java</span>
+  <span class="tab" onclick="switchTab('bali')">Bali</span>
+  <span class="tab" onclick="switchTab('lombok')">Lombok & Gili</span>
+  <span class="tab" onclick="switchTab('flores')">Flores & Komodo</span>
+</div>
+
+<div class="tab-content active" id="tab-java">
+  <div class="card">
+    <h3>Java Essentials</h3>
+    <p><strong>Best food:</strong> Gudeg (jackfruit stew, Yogya speciality), rawon (black beef soup), sate klatak (goat satay grilled on bicycle spokes — seriously). Street warungs: $1–2 per meal.</p>
+    <p><strong>Getting around:</strong> Trains on Java are excellent — book via Traveloka app. Executive class has AC, reclining seats, and onboard meals. For short hops, Gojek (motorbike taxi, like Uber) costs $0.50–2.</p>
+    <p><strong>Walking tours:</strong> Yogyakarta's old city is one of the best walking cities in Southeast Asia. The alleys behind the Kraton have batik workshops where you can watch artisans work. Jakarta's Old Town walking tour starts at Fatahillah Square.</p>
+    <p><strong>Hostels:</strong> Java has the best hostel culture in Indonesia — social common areas, rooftop bars, organised tours. Expect $6–12/night.</p>
+    <p><strong>Watch out:</strong> Jakarta traffic is brutal — allow 2x Google Maps time estimates. The sidewalks in Jakarta are often broken — wear sturdy shoes.</p>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-bali">
+  <div class="card">
+    <h3>Bali Beyond the Tourist Trail</h3>
+    <p><strong>Best food:</strong> Babi guling (roast suckling pig — Ibu Oka in Ubud is famous), lawar (minced meat with spices and fresh blood — the real version), nasi campur Bali (mixed rice with all the toppings).</p>
+    <p><strong>Getting around:</strong> Scooter rental is $5/day. You need an international driving permit — police checkpoints target tourists. Gojek works everywhere.</p>
+    <p><strong>Avoid:</strong> Kuta (unless you want drunk Australians and chain restaurants). Canggu is the current backpacker hub — fun, but busy. Seminyak for nicer cafes.</p>
+    <p><strong>Walking tours:</strong> The ridge walks around Ubud are unbeatable. For something different: the Jatiluwih rice terraces (UNESCO, far less crowded than Tegalalang, with 5 km of walking paths).</p>
+    <p><strong>Hidden gem:</strong> Sidemen Valley — what Ubud was 20 years ago. Rice terraces, Mount Agung views, zero crowds.</p>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-lombok">
+  <div class="card">
+    <h3>Lombok & the Gilis</h3>
+    <p><strong>Best food:</strong> Ayam taliwang (spicy grilled chicken — Lombok's signature dish), plecing kangkung (water spinach with sambal). Sambal in Lombok is seriously hot — proceed with caution.</p>
+    <p><strong>Getting around:</strong> Scooter is king in south Lombok ($4/day). The roads are good and traffic is light. No scooters on Gili Islands — bicycle ($3/day) or your feet.</p>
+    <p><strong>Walking tours:</strong> The south Lombok coastal trail from Kuta to Gerupuk takes about 3 hours — climb the hill between bays for panoramic views of the Indian Ocean.</p>
+    <p><strong>Gili tips:</strong> Gili T = party. Gili Air = balance. Gili Meno = honeymooners and not much else. The snorkelling between Gili T and Gili Meno is the best spot for turtles. No motorised vehicles — the silence at night is magical.</p>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-flores">
+  <div class="card">
+    <h3>Flores & Komodo</h3>
+    <p><strong>Best food:</strong> Ikan bakar (grilled fish — incredibly fresh on the coast), se'i (smoked pork — Flores is mostly Christian, so pork is common). Bring snacks for the long bus rides.</p>
+    <p><strong>Getting around:</strong> The Trans-Flores Highway runs the length of the island. Shared minivans are the default — cramped but cheap ($10–15 for a full day). Book a day ahead at your guesthouse.</p>
+    <p><strong>Walking tours:</strong> Kelimutu sunrise is the crown jewel — tri-coloured crater lakes at dawn. The Bajawa area has walking routes between traditional villages that most tourists miss — ask at your guesthouse for a local guide ($10–15/day).</p>
+    <p><strong>Komodo boat trip:</strong> Negotiate at the Labuan Bajo harbour — shared trips start at $150 for 2 days. Includes meals, basic mattress on deck (sleeping under the stars), and all the snorkelling you can handle. Bring your own mask if you can — the rental gear is tired.</p>
+  </div>
+</div>
+
+<!-- PACKING CHECKLIST -->
+<h2>🎒 Packing Checklist</h2>
+<p style="color:var(--muted);">Tap each item you've packed. Backpacker rule: if you're not sure you need it, leave it behind.</p>
+
+<div class="card">
+  <ul class="checklist" id="packList">
+    <li onclick="togglePack(this)"><span class="box"></span>Backpack (40–55L — anything bigger and you'll hate yourself on buses)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Day pack (foldable, for hikes and day trips)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Passport + photocopies (also scan and email to yourself)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Travel insurance (with volcano trekking and scooter cover)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Light rain jacket (tropical downpours are sudden and heavy)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Quick-dry t-shirts × 4</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Shorts × 2, light trousers × 1</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Sarong (multi-purpose — towel, beach mat, temple cover, blanket)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Swimwear × 2</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Trainers or trail runners (your main shoe)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Flip-flops / sandals</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Socks × 3 (merino wool — doesn't smell)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Head torch (for Bromo, Ijen, Kelimutu — all sunrise hikes start in the dark)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Dry bag (your electronics WILL get wet on boats)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Power bank (20,000 mAh — long bus rides, infrequent outlets)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Universal adaptor (Indonesia uses Type C and F, 230V)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Basic first aid kit (plasters, antiseptic, Imodium, rehydration salts)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Sunscreen (expensive in Indonesia — bring from home)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Insect repellent (DEET or picaridin — mosquitoes are real)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Reusable water bottle (with filter if possible — tap water is not safe)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Padlock (for hostel lockers)</li>
+    <li onclick="togglePack(this)"><span class="box"></span>Phone with Traveloka, Gojek, Grab, and offline Google Maps downloaded</li>
+  </ul>
+  <p id="packProgress" style="margin-top:12px;font-weight:600;color:var(--amber);">0 / 22 items packed</p>
+</div>
+
+<!-- DAILY COST BREAKDOWN -->
+<h2>📊 Sample Daily Costs</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Budget (Hostels)</th><th>Mid-range</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Bed (dorm)</td><td>$6–12</td><td>—</td></tr>
+      <tr><td>Private room</td><td>—</td><td>$15–30</td></tr>
+      <tr><td>Street food meal</td><td>$1–3</td><td>$3–6</td></tr>
+      <tr><td>Restaurant meal</td><td>$3–6</td><td>$6–15</td></tr>
+      <tr><td>Bintang beer (large)</td><td>$2–3</td><td>$3–5</td></tr>
+      <tr><td>Scooter rental / day</td><td>$4–6</td><td>$6–8</td></tr>
+      <tr><td>Long-distance bus (8h)</td><td>$10–15</td><td>$15–25</td></tr>
+      <tr><td>Domestic flight</td><td>$30–60</td><td>$60–100</td></tr>
+      <tr><td>Temple entry</td><td>$1–5</td><td>$20–25 (Borobudur)</td></tr>
+      <tr><td>Volcano trek</td><td>$20–50</td><td>$50–200 (Rinjani, multi-day)</td></tr>
+      <tr><td>Laundry (per kg)</td><td>$1–2</td><td>$2–3</td></tr>
+      <tr><td>SIM card (30 days, 20GB)</td><td>$5–8</td><td>$8–12</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MUST-KNOW TIPS -->
+<h2>🧭 Must-Know Tips</h2>
+
+<div class="card">
+  <h3>Getting Around</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Trains on Java</strong> — the best way to travel. Book 2–3 days ahead on Traveloka for popular routes (Jakarta–Yogyakarta sells out).</li>
+    <li><strong>Ferries between islands</strong> — frequent, cheap ($1–5), slow. The Gilimanuk–Bali ferry runs 24/7.</li>
+    <li><strong>Domestic flights</strong> — Lion Air, AirAsia, Batik Air. Book 2–4 weeks ahead for best prices. Luggage allowance is stingy (15–20 kg).</li>
+    <li><strong>Bemos and angkots</strong> — shared minivans. Cheap but slow and cramped. For short hops only.</li>
+    <li><strong>Gojek / Grab</strong> — motorbike taxis. Download both apps. Grab is usually slightly cheaper; Gojek has wider coverage.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Health & Safety</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Water:</strong> Never drink tap water. Bottled water (Aqua) is everywhere and costs $0.20. Refill stations are increasingly common at hostels.</li>
+    <li><strong>Food:</strong> Street food is generally safe if it's cooked hot in front of you and the stall is busy. Busy stalls = high turnover = fresh food.</li>
+    <li><strong>Bali belly:</strong> Almost everyone gets it at some point. Imodium and rehydration salts are essential. Most cases clear in 24–48 hours.</li>
+    <li><strong>Mosquitoes:</strong> Dengue fever exists. Use repellent, wear long sleeves at dusk. Malaria is rare in tourist areas but present in remote parts of Flores and Sumatra.</li>
+    <li><strong>Scooters:</strong> The #1 cause of tourist injury. Wear a helmet. Don't drink and ride. Don't ride at night in rural areas. Police checkpoints are real — carry your IDP.</li>
+    <li><strong>Volcanoes:</strong> Check activity status before climbing. Indonesia's volcanoes are monitored but can become active quickly.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Cultural Notes</h3>
+  <ul style="color:var(--muted);padding-left:20px;">
+    <li><strong>Right hand only</strong> — for eating, giving money, shaking hands. The left hand is considered unclean.</li>
+    <li><strong>Temple etiquette:</strong> Cover shoulders and knees. Sarongs are usually provided at tourist temples. Don't point your feet at shrines or people.</li>
+    <li><strong>Ramadan:</strong> If travelling during Ramadan, many warungs close during the day in Muslim areas (Java, Lombok). Tourist areas in Bali are unaffected. Eating/drinking in public during fasting hours is disrespectful.</li>
+    <li><strong>Bargaining:</strong> Normal in markets, not in restaurants or for transport. Start at 50% of the asking price and meet in the middle. Smile — it's part of the interaction.</li>
+    <li><strong>"Hello Mister!"</strong> — Kids will call this out constantly, especially in rural areas. They're being friendly, not rude. Smile and wave back.</li>
+  </ul>
+</div>
+
+<div class="highlight-box">
+  <strong>📱 Apps to download before you go:</strong> Traveloka (trains, flights, hotels), Gojek + Grab (transport, food delivery), Maps.me or Google Maps (offline maps), WhatsApp (everyone in Indonesia uses it), XE Currency, Google Translate (download Bahasa Indonesia offline).
+</div>
+
+<!-- VISA & ENTRY -->
+<h2>🛂 Visa & Entry</h2>
+<div class="card">
+  <p>Most nationalities get a <strong>30-day visa-free entry</strong> (non-extendable) or a <strong>Visa on Arrival (VoA) for ~$35</strong> which can be extended once for another 30 days (total 60 days). For 3 months you'll need one of:</p>
+  <ol style="color:var(--muted);padding-left:20px;">
+    <li><strong>Visa on Arrival (60 days) + a visa run</strong> — Fly to Singapore/Kuala Lumpur for a weekend (flights from $40), return with a fresh VoA for another 30 days.</li>
+    <li><strong>B211A Visit Visa (60 days, extendable to 180)</strong> — Apply before departure through an Indonesian embassy or agent ($100–200). Best option for a full 3 months without visa runs.</li>
+  </ol>
+  <p style="margin-top:10px;">Check the latest at your local Indonesian embassy — visa rules change frequently. Your passport must be valid for 6 months beyond your arrival date.</p>
+</div>
+
+<!-- BEST TIMES -->
+<h2>📅 When to Go</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Season</th><th>Months</th><th>What to expect</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Dry season ☀️</strong></td><td>April–October</td><td>Best time. Clear skies for volcanoes, good visibility for diving. July–August is peak — book ahead.</td></tr>
+      <tr><td><strong>Wet season 🌧️</strong></td><td>November–March</td><td>Short heavy downpours, mostly afternoon. Still travelable but some volcano treks close. Fewer tourists, lower prices. Bali is wettest December–February.</td></tr>
+      <tr><td><strong>Shoulder 🌤️</strong></td><td>April–May, October</td><td>The sweet spot — mostly dry, lower crowds, good prices.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- QUICK START -->
+<h2>🚀 Quick Start: Your First Week</h2>
+<div class="card" style="border:2px solid var(--emerald);">
+  <ol style="color:var(--muted);padding-left:20px;">
+    <li><strong>Day 1–3:</strong> Land in Jakarta. Check into PackerBox Hostel. Do the free walking tour. Eat all the street food in Glodok.</li>
+    <li><strong>Day 4:</strong> Train to Yogyakarta (book a morning departure, arrive afternoon).</li>
+    <li><strong>Day 5–7:</strong> Borobudur sunrise, Prambanan sunset, Malioboro night market, Kraton walking tour. You've hit two of the world's great temples in 48 hours.</li>
+    <li><strong>Day 8:</strong> Train to Probolinggo → minivan to Cemoro Lawang. Bromo sunrise tomorrow.</li>
+    <li>From there: you're into the volcano belt and the adventure is fully underway.</li>
+  </ol>
+</div>
+
+<p style="text-align:center;margin-top:48px;color:var(--muted);font-size:0.9rem;">Selamat jalan! (Safe travels!) — Made for backpackers, by backpackers. 🇮🇩</p>
+
+<div style="text-align:center;padding:20px 0 0"><a href="/" style="display:inline-block;padding:8px 24px;border:1px solid #252d3d;border-radius:8px;color:#8b95a8;text-decoration:none;font-size:13px;font-weight:500;transition:border-color 0.2s,color 0.2s">← Curated Intelligence</a></div>
+</main>
+
+<script>
+// Timeline toggle
+function toggleStop(el) {
+  el.classList.toggle('active');
+}
+
+// Region tabs
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// Packing checklist
+function togglePack(el) {
+  el.classList.toggle('done');
+  const total = document.querySelectorAll('#packList li').length;
+  const done = document.querySelectorAll('#packList li.done').length;
+  document.getElementById('packProgress').textContent = done + ' / ' + total + ' items packed';
+}
+
+// Budget calculator
+function updateBudget() {
+  const accom = parseInt(document.getElementById('accomSlider').value);
+  const food = parseInt(document.getElementById('foodSlider').value);
+  const transp = parseInt(document.getElementById('transpSlider').value);
+  const act = parseInt(document.getElementById('actSlider').value);
+  const spent = parseInt(document.getElementById('spentInput').value) || 0;
+
+  document.getElementById('accomVal').textContent = '$' + accom;
+  document.getElementById('foodVal').textContent = '$' + food;
+  document.getElementById('transpVal').textContent = '$' + transp;
+  document.getElementById('actVal').textContent = '$' + act;
+
+  const daily = accom + food + transp + act;
+  const tripTotal = daily * 90;
+  document.getElementById('dailyTotal').textContent = '$' + daily;
+  document.getElementById('tripTotal').textContent = '$' + tripTotal.toLocaleString();
+
+  const totalBudget = tripTotal;
+  const pct = totalBudget > 0 ? Math.min(spent / totalBudget * 100, 100) : 0;
+  const fill = document.getElementById('budgetFill');
+  fill.style.width = pct + '%';
+  fill.className = 'budget-fill';
+  if (pct > 80) fill.classList.add('danger');
+  else if (pct > 60) fill.classList.add('warning');
+
+  const msg = document.getElementById('budgetMsg');
+  if (spent === 0) msg.textContent = 'Start tracking as you travel!';
+  else if (pct < 40) msg.textContent = '✅ Well under budget — keep it up!';
+  else if (pct < 70) msg.textContent = '⚡ On track — roughly where you should be.';
+  else if (pct < 90) msg.textContent = '⚠️ Getting tight — maybe a few more street-food days?';
+  else msg.textContent = '🔴 Almost at your limit! Time for dorm beds and warungs.';
+}
+updateBudget();
+</script>
+</body>
+</html>
